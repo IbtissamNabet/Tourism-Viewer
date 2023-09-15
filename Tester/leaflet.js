@@ -14,3 +14,12 @@ var polygon = L.polygon([
     [51.503, -0.06],
     [51.51, -0.047]
 ]).addTo(map);
+
+var popup = L.popup();
+///affiche dans un pop-up les coordonnées s'il n'y a pas de message
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
+}
