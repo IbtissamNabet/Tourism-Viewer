@@ -33,15 +33,15 @@
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
 
-            /// bindPopup: lie un pop-up à un objet déclaré dans une variable
-            /// openPopup: affiche le pop-up à l'ouverture de la page
+            // bindPopup: lie un pop-up à un objet déclaré dans une variable
+            // openPopup: affiche le pop-up à l'ouverture de la page
 
             marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
             circle.bindPopup("I am a circle.");
             polygon.bindPopup("I am a polygon.");
 
             // openOn: comme addOn(dans leaflet.js), sauf qu'il gère automatiquement 
-            ///les ouvertures et fermetures de pop-up quand tu en cliques sur un autre
+            // les ouvertures et fermetures de pop-up quand tu en cliques sur un autre
             var popup = L.popup()
             .setLatLng([51.513, -0.09])
             .setContent("I am a standalone popup.")
