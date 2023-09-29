@@ -49,5 +49,4 @@ popup
 .setContent("I am a standalone popup.")
 .openOn(map);
 
-
 map.on('click', onMapClick);

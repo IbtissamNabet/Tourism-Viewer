@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         
         <title>Tourism Viewer</title>
+        <link rel="icon" href="images/logo.png">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <link rel = "stylesheet" href = "styles/style.css">
+        <link rel="stylesheet" href="styles/style.css">
 
         <!-- Import de Leaflet -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -27,18 +28,37 @@
     <body>
         <header>
             <nav>
-
+                <a href="index.html" class="logo-lien">
+                    <img id="logo" src="images/logo.png" alt="Logo Tourism Viewer">
+                </a>
+                <a href="index.html">Map</a>
+                <a href="#infos">Infos</a>
+                <a href="#creators">Creators</a>
             </nav>
         </header>
 
         <main>
 
-            <!-- Donne la taille de la carte-->
-            <div id="map" style="width: 600px; height: 400px;">  </div>
+            <div id="map"></div>
+
+            <div id="infos">
+
+            </div>
             
         </main>
 
         <footer>
+            <div id="creators">
+                <ul>
+                    <li><a href="">Hanitrinirina Sarobidy</a></li>
+                    <li><a href="">Nabet Ibtissam</a></li>
+                    <li><a href="">Ratonandromanana Iavosoa</a></li>
+                    <li><a href="">Paulus Noëllie</a></li>
+                </ul>
+            </div>
+            <div class="cadre-projet">
+
+            </div>
 
         </footer>
     </body>

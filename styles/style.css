@@ -1,0 +1,26 @@
+body {
+    --color-primary: white;
+    --color-secondary: #252020;
+    margin: 0;
+    background-color: var(--color-secondary);
+}
+
+#logo {
+    width:2em;
+    height: 2em;
+}
+
+#map {
+    width: auto;
+    height: 70em;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+
+}
+
+a:active, a:hover {
+    color: gray;
+}
