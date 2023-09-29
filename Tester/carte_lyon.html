@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- Import de Leaflet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+        
+        <!-- Import de leaflet-routing-machine pour les itinéraires-->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+        
+    </head>
+    <header>
+        Here is the header
+    </header>
+
+    <body>
+        <!-- Donne la taille de la carte-->
+        <div id="map" style="width: auto; height: 800px;">  </div>
+
+        <!-- Les variables se trouvent dans le fichier leaflet.js -->
+            <script type="text/javascript" src="leaflet_lyon.js"></script>
+            <script>
+            
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            /// bindPopup: lie un pop-up à un objet déclaré dans une variable
+            /// openPopup: affiche le pop-up à l'ouverture de la page
+
+            marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+            circle.bindPopup("I am a circle.");
+            polygon.bindPopup("I am a polygon.");
+
+            // openOn: comme addOn(dans leaflet.js), sauf qu'il gère automatiquement 
+            ///les ouvertures et fermetures de pop-up quand tu en cliques sur un autre
+            var popup = L.popup()
+            .setLatLng([45.75, 4.85])
+            .setContent("I am a standalone popup.")
+            .openOn(map);
+
+
+            map.on('click', onMapClick);
+            </script>
+    </body>
+
+    <footer>
+        Contact, creator and co here
+    </footer>
+</html>
