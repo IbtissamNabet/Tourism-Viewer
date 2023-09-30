@@ -1,9 +1,10 @@
 body {
     --color-primary: white;
     --color-secondary: #252020;
-    --color-tertiary: #ffad77 ;
+    --color-tertiary: #fca871; /*#b5cfff*/
     margin: 0;
     background-color: var(--color-secondary);
+    color: var(--color-primary);
 }
 
 #logo {
@@ -23,11 +24,13 @@ body {
     background-color: var(--color-tertiary)  ;
     display: flex;
     flex-direction: column;
+    border-radius: 0px 35px 0px 35px;
 }
 
 #map {
     width: 80%;
     z-index: 0;
+    border-radius: 35px 0px 35px 0px;
 }
 
 a {
@@ -38,6 +41,10 @@ a {
 
 a:active, a:hover {
     color: gray;
+}
+
+#infos {
+    padding: 20px;
 }
 
 header, footer {
@@ -59,6 +66,8 @@ nav {
     justify-content: space-between;
     padding-right: 40em;
     padding-left: 40em;
+    background-color: var(--color-tertiary);
+    border-radius: 20px;
 }
 
 label {
@@ -71,4 +80,5 @@ footer {
     justify-content: space-between;
     padding-left: 20em;
     align-items: center;
+    background-color: var(--color-tertiary);
 }
