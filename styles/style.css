@@ -1,6 +1,7 @@
 body {
     --color-primary: white;
     --color-secondary: #252020;
+    --color-tertiary: #ffad77 ;
     margin: 0;
     background-color: var(--color-secondary);
 }
@@ -10,9 +11,23 @@ body {
     height: 2em;
 }
 
+.recherches-touristiques {
+    display: flex;
+    flex-direction: row;
+    height: 55em;
+}
+
+.filtres-map {
+    width: 20%;
+    padding: 20px;
+    background-color: var(--color-tertiary)  ;
+    display: flex;
+    flex-direction: column;
+}
+
 #map {
-    width: auto;
-    height: 70em;
+    width: 80%;
+    z-index: 0;
 }
 
 a {
@@ -23,4 +38,37 @@ a {
 
 a:active, a:hover {
     color: gray;
+}
+
+header, footer {
+    padding : 20px 50px;
+    color: var(--color-primary);
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--color-secondary);
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 40em;
+    padding-left: 40em;
+}
+
+label {
+    color: var(--color-primary);
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 20em;
+    align-items: center;
 }
