@@ -1,6 +1,6 @@
 var map = L.map('map').setView([45.75, 4.85], 13);
 
-var marker = L.marker([45.75, 4.85]).addTo(map);
+/**var marker = L.marker([45.75, 4.85]).addTo(map);
 
 var circle = L.circle([45.75, 4.83], {
     color: 'red',
@@ -22,7 +22,7 @@ function onMapClick(e) {
         .setLatLng(e.latlng)
         .setContent("You clicked the map at " + e.latlng.toString())
         .openOn(map);
-}
+}*/
 
 // For the itinéraire de La Doua au parc des cerisiers (?)
 /**L.Routing.control({
@@ -76,7 +76,7 @@ let geojsonFeature = {
       },
       "geometry": {
           "type": "Point",
-          "coordinates": [-73.998027, 40.722413]
+          "coordinates": [45.78954, 4.88257]
       },
       "id": "0aade070-1667-4cb2-b22b-b6db4215453d"
   }, {
@@ -132,7 +132,7 @@ let layers = L.geoJSON(geojsonFeature).addTo(map);
 let MyControlClass =  L.Control.extend({
 
   options: {
-    position: 'topright'
+    position: 'topleft'
   },
 
 onAdd: function(map) {
