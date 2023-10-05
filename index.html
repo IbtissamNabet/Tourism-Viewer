@@ -21,7 +21,7 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""></script>
 
-        <script type="text/javascript" src="leaflet.js" defer></script>
+        <script type="text/javascript" src="scripts/map.js" defer></script>
         
     </head>
 
@@ -40,12 +40,23 @@
         <main>
 
             <section class="recherches-touristiques">
-                <div class="filtres-map">
-                    <label for="depart">Départ</label>
-                    <input type="text" name="itineraire" id="depart" placeholder="Choose on the map">
-                    <label for="arrivee">Arrivée</label>
-                    <input type="text" name="itineraire" id="arrivee" placeholder="Choose on the map">
-                </div>
+                <section class="filtres-map">
+                    <div class="itineraire">
+                        <label for="depart">Départ</label>
+                        <input type="text" name="itineraire" id="depart" placeholder="Choose on the map">
+                        <label for="arrivee">Arrivée</label>
+                        <input type="text" name="itineraire" id="arrivee" placeholder="Choose on the map">
+                    </div>
+                    <div id="selection-type-lieux">
+                        <!-- <button id="culture">Sites Culturels</button>
+                        <button id="hebergements">Hébergements</button>
+                        <button id="restauration">Restauration</button>
+                        <button id="sports-loisirs">Sports et Loisirs</button>
+                        <button id="infos-touristes">Services d'Information Touristiques</button>
+                        <button id="presatataire-activite">Prestataire d'Activité</button> -->
+                    </div>
+                    <button type="reset">Réinitialiser mes choix</button>
+                </section>
             
                 <div id="map"></div>
             </section>

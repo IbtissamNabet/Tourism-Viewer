@@ -1,1 +1,19 @@
 couleur du site en fonction des saisons
+
+
+
+
+
+recuperer les noms sous forme de listeMots
+
+id = nom sans les espaces
+
+- class="selection-type-lieux"
+boucle for >>
+insertion button pour chaque types de lieux
+
+nom_t1 nom_t2
+recup nom_t2 le groupe global
+
+recup nom_t1 pour la sous classe
+> autre formation de buttons
