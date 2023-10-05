@@ -20,11 +20,24 @@ body {
 
 .filtres-map {
     width: 20%;
-    padding: 20px;
     background-color: var(--color-tertiary)  ;
+    border-radius: 0px 35px 0px 35px;
+}
+
+.itineraire {
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    border-radius: 0px 35px 0px 35px;
+}
+
+.selection-type-lieux {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.selection-type-lieux button {
+    background-color: var(--color-primary);
 }
 
 #map {
