@@ -1,7 +1,7 @@
 body {
     --color-primary: white;
     --color-secondary: #252020;
-    --color-tertiary: #fca871; /*#b5cfff*/
+    --color-tertiary: #b5cfff; /*#b5cfff*/
     margin: 0;
     background-color: var(--color-secondary);
     color: var(--color-primary);
