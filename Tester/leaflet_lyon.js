@@ -1,14 +1,15 @@
 var map = L.map('map').setView([45.75, 4.85], 13);
 
 /**var marker = L.marker([45.75, 4.85]).addTo(map);
-
-var circle = L.circle([45.75, 4.83], {
+*/
+var circle = L.circle([45.767422, 4.893609], { //conserver l'ordre longitude/latitude de Google Maps (I swear I'm done with this)
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5,
-    radius: 500
+    radius: 2500
 }).addTo(map);
 
+/**
 var polygon = L.polygon([
     [45.75, 4.84],
     [45.77, 4.82],
