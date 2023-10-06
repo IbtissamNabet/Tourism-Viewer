@@ -22,8 +22,8 @@ function onMapClick(e) {
         .setLatLng(e.latlng)
         .setContent("You clicked the map at " + e.latlng.toString())
         .openOn(map);
-}*/
-
+}
+*/
 // For the itinéraire de La Doua au parc des cerisiers (?)
 /**L.Routing.control({
     waypoints: [
@@ -50,7 +50,7 @@ let geojsonFeature = {
       },
       "geometry": {
           "type": "Point",
-          "coordinates": [45.767422, 4.893609]
+          "coordinates": [4.893609 , 45.767422] //quand tu cherches la latitude et la longitude, c'est l'inverse qu'il faut mettre dans les crochets
       },
       "id": "7c587f8f-6ad8-4638-b831-cb368b3a598d"
   }, {
@@ -63,7 +63,7 @@ let geojsonFeature = {
       },
       "geometry": {
           "type": "Point",
-          "coordinates": [45.775965, 4.889241]
+          "coordinates": [4.889241, 45.775965]
       },
       "id": "2367c632-4ce1-4b4e-b705-1f7698dc70d0"
   }, {
@@ -76,7 +76,7 @@ let geojsonFeature = {
       },
       "geometry": {
           "type": "Point",
-          "coordinates": [45.78954, 4.88257]
+          "coordinates": [4.88257, 45.78954]
       },
       "id": "0aade070-1667-4cb2-b22b-b6db4215453d"
   }, {
@@ -89,7 +89,7 @@ let geojsonFeature = {
       },
       "geometry": {
           "type": "Point",
-          "coordinates": [45.770472, 4.883753]
+          "coordinates": [4.883753, 45.770472]
       },
       "id": "6d726c5b-81a0-4a23-b010-43e8cb5c9163"
   }, {
@@ -102,7 +102,7 @@ let geojsonFeature = {
       },
       "geometry": {
           "type": "Point",
-          "coordinates": [45.770737, 4.881958]
+          "coordinates": [4.881958, 45.770737]
       },
       "id": "0a354fb5-37e2-43cf-ab6d-71b4ded70d99"
   }, {
@@ -115,7 +115,7 @@ let geojsonFeature = {
       },
       "geometry": {
           "type": "Point",
-          "coordinates": [45.769294, 4.883721]
+          "coordinates": [4.883721, 45.769294]
       },
       "id": "fd590e75-1098-447e-bccf-7ab618772a64"
   }]
@@ -173,7 +173,7 @@ onAdd: function(map) {
   var buttonFilter = L.DomUtil.create('button', 'button-class', div);
   buttonFilter.innerHTML = "Filter";
 
-  L.DomEvent.on(buttonFilter, 'click', function() { this.filter(parseInt(inputMin.value), parseInt(inputMax.value), inputOther.checked, inputPublic.checked, inputBusiness.checked); }, this);
+  L.DomEvent.on(buttonFilter, 'click', function() { this.filter(inputOther.checked, inputPublic.checked, inputBusiness.checked); }, this);
 
   return div;
 },
