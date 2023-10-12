@@ -2,12 +2,16 @@ var map = L.map('map').setView([45.75, 4.85], 13);
 
 /**var marker = L.marker([45.75, 4.85]).addTo(map);
 */
-var circle = L.circle([45.767422, 4.893609], { //conserver l'ordre longitude/latitude de Google Maps (I swear I'm done with this)
-    color: 'red',
+var centerpoint = [45.767422, 4.893609];
+
+var circle = L.circle(centerpoint, { //conserver l'ordre longitude/latitude de Google Maps (I swear I'm done with this)
+    color: 'white',
     fillColor: '#f03',
-    fillOpacity: 0.5,
+    fillOpacity: 0,
     radius: 2500
 }).addTo(map);
+
+
 
 /**
 var polygon = L.polygon([
@@ -119,7 +123,8 @@ let geojsonFeature = {
           "coordinates": [4.883721, 45.769294]
       },
       "id": "fd590e75-1098-447e-bccf-7ab618772a64"
-  }]
+  },   
+]
 };
 
 // Initialisation de la carte
@@ -206,8 +211,28 @@ onRemove: function(map)
 }
 });
 
+/*filter (polygon) {
+    map.removeLayer(cercle);
+
+    cercle = L.geoJSON(geojsonFeature,
+        {
+            filter: function (feature){
+            if (!turf.booleanPointInPolygon(feature.properties.geometry.coordinates, circle))
+                return false;
+        }
+    }).addTo(map);
+
+onRemove: function(map)
+{
+
+}
+};*/
+
+
 // Ajout de l'interface utilisateur à la carte
 let myControl = new MyControlClass().addTo(map);
+
+
 
 //Leaflet.LayerTreeControl
 //Leaflet.StyledLayerControl
