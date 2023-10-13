@@ -1,0 +1,57 @@
+,URI,Label,ParentURI,ParentLabel
+14,<https://www.datatourisme.fr/ontology/core#Dune>,Dune,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+18,<https://www.datatourisme.fr/ontology/core#EducationalTrail>,Sentier de découverte et d'interprétation,<https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace>,"Site sportif, récréatif et de loisirs"
+33,<https://www.datatourisme.fr/ontology/core#CollectiveAccommodation>,Hébergement collectif,<https://www.datatourisme.fr/ontology/core#Accommodation>,Hébergement
+48,<https://www.datatourisme.fr/ontology/core#Glacier>,Glacier de montagne,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+49,<https://www.datatourisme.fr/ontology/core#Gorge>,Gorge,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+57,<https://www.datatourisme.fr/ontology/core#HotelTrade>,Hôtellerie,<https://www.datatourisme.fr/ontology/core#Accommodation>,Hébergement
+63,<https://www.datatourisme.fr/ontology/core#IceCreamShop>,Glacier,<https://www.datatourisme.fr/ontology/core#FoodEstablishment>,Restauration
+66,<https://www.datatourisme.fr/ontology/core#Icefall>,Cascade de glace,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+73,<https://www.datatourisme.fr/ontology/core#DefenceSite>,Site de défense,<https://www.datatourisme.fr/ontology/core#CulturalSite>,Site culturel
+82,<https://www.datatourisme.fr/ontology/core#DepartementTourismCommittee>,Comité départemental du tourisme,<https://www.datatourisme.fr/ontology/core#TouristInformationCenter>,Service d'information touristique
+87,<https://www.datatourisme.fr/ontology/core#Cellar>,Cave ou caveau,<https://www.datatourisme.fr/ontology/core#FoodEstablishment>,Restauration
+89,<https://www.datatourisme.fr/ontology/core#CaveSinkholeOrAven>,"Grotte, gouffre, aven, caverne, carrière",<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+99,<https://www.datatourisme.fr/ontology/core#TechnicalHeritage>,"Patrimoine industriel, artisanal, rural, agricole et technique",<https://www.datatourisme.fr/ontology/core#CulturalSite>,Site culturel
+105,<https://www.datatourisme.fr/ontology/core#ThemePark>,"Parc de loisirs, parc à thème",<https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace>,"Site sportif, récréatif et de loisirs"
+108,<https://www.datatourisme.fr/ontology/core#LeisureSportActivityProvider>,Prestataire d'activité sportive et de loisir,<https://www.datatourisme.fr/ontology/core#ActivityProvider>,Prestataire d'activité
+110,<https://www.datatourisme.fr/ontology/core#Lake>,Lac,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+116,<https://www.datatourisme.fr/ontology/core#LeisureComplex>,Complexe de loisirs (loisirs regroupés),<https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace>,"Site sportif, récréatif et de loisirs"
+126,<https://www.datatourisme.fr/ontology/core#ProfessionalTourGuide>,Guide professionnel,<https://www.datatourisme.fr/ontology/core#TouristInformationCenter>,Service d'information touristique
+142,<https://www.datatourisme.fr/ontology/core#ArcheologicalSite>,Site archéologique,<https://www.datatourisme.fr/ontology/core#CulturalSite>,Site culturel
+175,<https://www.datatourisme.fr/ontology/core#RentalAccommodation>,Hébergement locatif,<https://www.datatourisme.fr/ontology/core#Accommodation>,Hébergement
+177,<https://www.datatourisme.fr/ontology/core#ReligiousSite>,Site religieux,<https://www.datatourisme.fr/ontology/core#CulturalSite>,Site culturel
+178,<https://www.datatourisme.fr/ontology/core#RemarkableBuilding>,Bâtiment civil remarquable,<https://www.datatourisme.fr/ontology/core#CulturalSite>,Site culturel
+179,<https://www.datatourisme.fr/ontology/core#RemembranceSite>,Lieu de mémoire,<https://www.datatourisme.fr/ontology/core#CulturalSite>,Site culturel
+180,<https://www.datatourisme.fr/ontology/core#Restaurant>,Restaurant,<https://www.datatourisme.fr/ontology/core#FoodEstablishment>,Restauration
+186,<https://www.datatourisme.fr/ontology/core#RegionalTourismCommittee>,Comité régional du tourisme,<https://www.datatourisme.fr/ontology/core#TouristInformationCenter>,Service d'information touristique
+189,<https://www.datatourisme.fr/ontology/core#Volcano>,Volcan,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+193,<https://www.datatourisme.fr/ontology/core#VivariumAquarium>,Vivarium - Aquarium,<https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace>,"Site sportif, récréatif et de loisirs"
+196,<https://www.datatourisme.fr/ontology/core#VolunteerTourGuideOrGreeter>,"Hôte bénévole, greeter",<https://www.datatourisme.fr/ontology/core#TouristInformationCenter>,Service d'information touristique
+207,<https://www.datatourisme.fr/ontology/core#LocalTouristOffice>,Office de tourisme,<https://www.datatourisme.fr/ontology/core#TouristInformationCenter>,Service d'information touristique
+213,<https://www.datatourisme.fr/ontology/core#CafeOrTeahouse>,Café ou salon de thé,<https://www.datatourisme.fr/ontology/core#FoodEstablishment>,Restauration
+221,<https://www.datatourisme.fr/ontology/core#CampingAndCaravanning>,Hôtellerie de plein air,<https://www.datatourisme.fr/ontology/core#Accommodation>,Hébergement
+228,<https://www.datatourisme.fr/ontology/core#Canal>,Canal,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+229,<https://www.datatourisme.fr/ontology/core#Canyon>,Canyon,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+233,<https://www.datatourisme.fr/ontology/core#InterpretationCentre>,Centre d'interprétation,<https://www.datatourisme.fr/ontology/core#CulturalSite>,Site culturel
+234,<https://www.datatourisme.fr/ontology/core#IslandPeninsula>,Ile - presqu'île,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+240,<https://www.datatourisme.fr/ontology/core#IncomingTravelAgency>,Organisme réceptif,<https://www.datatourisme.fr/ontology/core#TouristInformationCenter>,Service d'information touristique
+257,<https://www.datatourisme.fr/ontology/core#ParkAndGarden>,Parc et jardin,<https://www.datatourisme.fr/ontology/core#CulturalSite>,Site culturel
+279,<https://www.datatourisme.fr/ontology/core#Bakery>,Boulangerie,<https://www.datatourisme.fr/ontology/core#FoodEstablishment>,Restauration
+280,<https://www.datatourisme.fr/ontology/core#BarOrPub>,"Bar, bar à thème",<https://www.datatourisme.fr/ontology/core#FoodEstablishment>,Restauration
+282,<https://www.datatourisme.fr/ontology/core#Beach>,Plage,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+303,<https://www.datatourisme.fr/ontology/core#TourGuideAgency>,Agence de guides,<https://www.datatourisme.fr/ontology/core#TouristInformationCenter>,Service d'information touristique
+304,<https://www.datatourisme.fr/ontology/core#TourismCentre>,Maison du tourisme,<https://www.datatourisme.fr/ontology/core#TouristInformationCenter>,Service d'information touristique
+305,<https://www.datatourisme.fr/ontology/core#TourOperatorOrTravelAgency>,Voyagiste,<https://www.datatourisme.fr/ontology/core#TouristInformationCenter>,Service d'information touristique
+307,<https://www.datatourisme.fr/ontology/core#Museum>,Musée,<https://www.datatourisme.fr/ontology/core#CulturalSite>,Site culturel
+309,<https://www.datatourisme.fr/ontology/core#NaturalCuriosity>,Curiosité naturelle,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+310,<https://www.datatourisme.fr/ontology/core#NaturalPark>,Parc naturel,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+319,<https://www.datatourisme.fr/ontology/core#SightseeingBoat>,Bateau promenade,<https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace>,"Site sportif, récréatif et de loisirs"
+331,<https://www.datatourisme.fr/ontology/core#PointOfView>,Point de vue,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+367,<https://www.datatourisme.fr/ontology/core#CulturalActivityProvider>,Prestataire d'activité culturelle,<https://www.datatourisme.fr/ontology/core#ActivityProvider>,Prestataire d'activité
+382,<https://www.datatourisme.fr/ontology/core#FastFoodRestaurant>,Restauration Rapide,<https://www.datatourisme.fr/ontology/core#FoodEstablishment>,Restauration
+392,<https://www.datatourisme.fr/ontology/core#BistroOrWineBar>,Bistrot - Bar à vin,<https://www.datatourisme.fr/ontology/core#FoodEstablishment>,Restauration
+410,<https://www.datatourisme.fr/ontology/core#Waterfall>,Cascade,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+413,<https://www.datatourisme.fr/ontology/core#ZooAnimalPark>,Zoo - parc animalier,<https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace>,"Site sportif, récréatif et de loisirs"
+419,<https://www.datatourisme.fr/ontology/core#StreetFood>,"Restauration ambulante, Food truck",<https://www.datatourisme.fr/ontology/core#FoodEstablishment>,Restauration
+431,<https://www.datatourisme.fr/ontology/core#Cirque>,Cirque naturel,<https://www.datatourisme.fr/ontology/core#NaturalHeritage>,Site naturel
+432,<https://www.datatourisme.fr/ontology/core#CircusPlace>,Cirque,<https://www.datatourisme.fr/ontology/core#SportsAndLeisurePlace>,"Site sportif, récréatif et de loisirs"
