@@ -31,8 +31,10 @@ for (let j = 0 ; j < distinctlieux.length; j++){
 
     const recup = document.querySelector(".selection-type-lieux")
 
-    const test1 = document.createElement("button");
-    test1.innerText = bouton;
+    const buttypes = document.createElement("button");
+    buttypes.innerText = bouton;
+    /* Création d'identifiants en enlevant les espaces des labels */
+    buttypes.id = bouton.replace(/\s/g,'');
 
-    recup.appendChild(test1);
+    recup.appendChild(buttypes);
 }
