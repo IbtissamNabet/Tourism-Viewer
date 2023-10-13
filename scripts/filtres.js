@@ -6,16 +6,33 @@
  * ****************************************************************
  */
 
-/* On range les sortes de Lieux par Types et Types Spécifiques */
-let listeTypesLieux = [];
-let listeLieux = [];
+/* On récupère le fichier json contenant les types de lieux sous forme de tableau */
+
+const rep = await fetch('json/types.json');
+const lieux = await rep.json();
+
+/* Tableau qui contiendra les types généraux des lieux */
+let distinctlieux = [];
+
+/* Pour tous les éléments de lieux, s'il ne corespond
+à aucun des éléments de distinct alors on le rajoute à distinct  */
+for (let i = 0; i < lieux.length; i++){
+
+    let types = lieux[i].ParentLabel;
+
+    if(distinctlieux.includes(types) === false)
+        distinctlieux.push(types);
+}
 
 
-/* listeTypesLieux.push(${   nom_t2   }); */
+/* Pour chacun des types généraux de lieux on crée un bouton */
+for (let j = 0 ; j < distinctlieux.length; j++){
+    let bouton = distinctlieux[j];
 
-let BtnLieux = document.getElementById("selection-type-lieux");
+    const recup = document.querySelector(".selection-type-lieux")
 
-for(let i = 0; i< ???; i++)
-BtnLieux.innerHTML=`
-    <button id="">${}</button>
-`;
+    const test1 = document.createElement("button");
+    test1.innerText = bouton;
+
+    recup.appendChild(test1);
+}
