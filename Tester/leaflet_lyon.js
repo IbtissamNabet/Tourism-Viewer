@@ -132,6 +132,59 @@ let geojsonFeature = {
 // Ajout un fichier geoJSON à la carte
 let layers = L.geoJSON(geojsonFeature).addTo(map);
 
+let MyItineraryClass = L.Control.extend(
+    {
+        options: {
+            position: 'topright'
+        },
+
+        onAdd: function(map)
+        {
+            this.map = map;
+
+            let div = L.DomUtil.create('div', 'leaflet-bar my-control');
+
+            let title = L.DomUtil.create('h3', '', div);
+            title.innerHTML = "Filter Itinerary: ";
+
+            let divTypeItin = L.DomUtil.create('div', '', divItin);
+            let inputItin = L.DomUtil.create('input', '', divTypeItin);
+            inputItin.type = "checkbox";
+            inputItin.checked = true;
+            let labelItin = L.DomUtil.create('label', '', divTypeItin);
+            labelItin.innerHTML = " ITINERAIRE";
+
+            var buttonFilter = L.DomUtil.create('button', 'button-class', div);
+            buttonFilter.innerHTML = "Filter Itinerary";
+
+            L.DomEvent.on(buttonFilter, 'click', function() { this.filter(inputItin.checked); }, this);
+
+            return div;
+        },
+
+        filter(inputInit)
+        {
+            map.removeLayer(layers);
+
+            layers = L.geoJSON(geojsonFeature,
+                {
+                    filter: function(feature)
+                    {
+                        if(turf.booleanPointInPolygon(feature.properties.geometry.coordinates, circle) == false)
+                            return false;
+                        return true;
+                    }
+                }
+            ).addTo(map);
+        },
+
+        onRemove: function(map)
+        {
+        }
+    }
+);
+
+
 /*
  * Classe gérant l'interface utilisateur de filtrage
  */
@@ -179,12 +232,12 @@ onAdd: function(map) {
   var buttonFilter = L.DomUtil.create('button', 'button-class', div);
   buttonFilter.innerHTML = "Filter";
 
-  L.DomEvent.on(buttonFilter, 'click', function() { this.filter(inputOther.checked, inputPublic.checked, inputBusiness.checked); }, this);
+  L.DomEvent.on(buttonFilter, 'click', function() { this.filter(inputOther.checked, inputPublic.checked, inputBusiness.checked)},this);
 
   return div;
 },
 
-filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked) {
+filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked){
 
   map.removeLayer(layers);
 
@@ -200,7 +253,6 @@ filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked) {
           else if(feature.properties.type == "COMMERCE" && !inputBusinessChecked) {
            return false;
           }
-
           return true;
       }
   }).addTo(map);
@@ -231,6 +283,7 @@ onRemove: function(map)
 
 // Ajout de l'interface utilisateur à la carte
 let myControl = new MyControlClass().addTo(map);
+let itineraireControl = new MyItineraryClass().addTo(map);
 
 
 
