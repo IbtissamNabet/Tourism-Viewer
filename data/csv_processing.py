@@ -61,10 +61,10 @@ data_type['ParentURI'] = data_type['ParentURI'].str.replace(">","")
 file_csv = data_type.to_csv(new_filepath_types)
 
 
-###### TRANSFORMATION DES FICHIERS types.csv ######
+###### TRANSFORMATION DES FICHIERS datatourisme.csv ######
 
 #récupération des fichiers du dossiers csv_files/raw_csv dans une liste de string
-dir_raw = "./csv_files/raw_csv"
+dir_raw = "./csv_files/raw_csv/"
 files = os.listdir(dir_raw)
 poi_files = [file for file in files if file.endswith("20231014.csv")]
 
@@ -73,8 +73,8 @@ for file in poi_files:
     new_file=dir_cleaned+file
     new_filepath_poi = Path(new_file)
     new_filepath_poi.parent.mkdir(parents=True, exist_ok=True)
-    
-    data_lieu = pd.read_csv('data.csv')
+    raw_file=dir_raw+file
+    data_lieu = pd.read_csv(raw_file)
 
     # crée 2 nouvelles colonnes pour  séparer code postal et ville
     data_lieu['Code_postal_et_commune'] = data_lieu['Code_postal_et_commune'].str.replace("#","")
