@@ -27,7 +27,8 @@ def import_poi(file_path,connexion):
             commune = row['Commune']
             site = row['Site_web']
             tel = row['Telephone']
-            description = row['Description']
+            description_non_codée = row['Description']
+            description = description_non_codée.encode('utf-8', errors='replace')
             categories = row['Categories_de_POI']
             if (db_operations.NotIn_poi(nom_poi,latitude,longitude,connexion)):
                 db_operations.insert_poi(nom_poi,latitude,longitude,adresse,mail,code,commune,site,tel,description,connexion)
@@ -35,7 +36,7 @@ def import_poi(file_path,connexion):
             #insertion dans poi implique insertion dans appartenir
             if (not(db_operations.NotIn_poi(nom_poi,latitude,longitude,connexion))):
                 id = db_operations.get_id_poi(nom_poi,latitude,longitude,connexion)
-                with open('..\\data\\csv_files\\cleaned_csv\\types.csv',newline='', encoding='utf-8') as csvtype:
+                with open('..//data//csv_files//cleaned_csv//types.csv',newline='', encoding='utf-8') as csvtype:
                     ctgr=csv.DictReader(csvtype)
                     for type in ctgr:
                         if (type['URI'] in categories):

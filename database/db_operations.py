@@ -2,6 +2,7 @@
 
 # fonction qui de vérification avant insertion dans Types
 # retourne vrai si un tuple(t1,t2) n'existe pas encore dans la table
+#nb d'occurence =0
 def NotIn_types(t1,t2,connexion):
     curseur=connexion.cursor()
     query = "SELECT COUNT(*) FROM Types WHERE nom_type = %s AND nom_type_1 = %s"  
@@ -11,7 +12,8 @@ def NotIn_types(t1,t2,connexion):
     return res[0] == 0 
 
 # fonction qui de vérification avant insertion dans POI
-# retourne vrai si un tuple(t1,t2) n'existe pas encore dans la table
+# retourne vrai si un tuple(t1,t2,t3) n'existe pas encore dans la table
+#le meme point d'interet mais pas le méme emplacement "
 def NotIn_poi(nom,latitude,longitude,connexion):
     curseur=connexion.cursor()
     query = "SELECT COUNT(*) FROM POI WHERE nom_poi = %s AND latitude = %s AND longitude = %s"   
@@ -37,7 +39,7 @@ def insert_type(type_,type_parent,connexion):
     values = (type_,type_parent)
     curseur.execute(query, values)
     #vérifier l'insertion
-    query = "SELECT * FROM types WHERE nom_type = %s AND nom_type_1 = %s"
+    query = "SELECT * FROM Types WHERE nom_type = %s AND nom_type_1 = %s"
     curseur.execute(query,(type_,type_parent))
     result=curseur.fetchone()
     print(result[0])
@@ -47,11 +49,11 @@ def insert_type(type_,type_parent,connexion):
             
 def insert_poi(nom_poi,latitude,longitude,adresse,mail,code,commune,site,tel,description,connexion):
     curseur=connexion.cursor()
-    query = "INSERT INTO poi (nom_poi,latitude,longitude,adresse_postale,adresse_mail,code_postal,commune,site_web,tel,description) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+    query = "INSERT INTO POI (nom_poi,latitude,longitude,adresse_postale,adresse_mail,code_postal,commune,site_web,tel,description) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
     values = (nom_poi,latitude,longitude,adresse,mail,code,commune,site,tel,description)
     curseur.execute(query, values)
     #vérifier l'insertion
-    query = "SELECT * FROM poi WHERE nom_poi = %s AND latitude = %s AND longitude = %s"
+    query = "SELECT * FROM POI WHERE nom_poi = %s AND latitude = %s AND longitude = %s"
     curseur.execute(query,(nom_poi,latitude,longitude))
     result=curseur.fetchone()
     print(result[1])
@@ -75,7 +77,7 @@ def insert_appartenir(id,nom_type,connexion):
     
 def get_id_poi(nom_poi,latitude,longitude,connexion):
     curseur=connexion.cursor()
-    query = "SELECT id_poi FROM poi WHERE nom_poi = %s AND latitude = %s AND longitude = %s"
+    query = "SELECT id_poi FROM POI WHERE nom_poi = %s AND latitude = %s AND longitude = %s"
     curseur.execute(query,(nom_poi,latitude,longitude))
     result=curseur.fetchone()
     curseur.close()
