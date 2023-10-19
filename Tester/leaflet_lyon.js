@@ -51,7 +51,8 @@ let geojsonFeature = {
           "shape": "Marker",
           "name": "Unnamed Layer",
           "category": "default",
-          "type": "COMMERCE"
+          "type": "COMMERCE",
+          "in_polygon" : false
       },
       "geometry": {
           "type": "Point",
@@ -64,7 +65,8 @@ let geojsonFeature = {
           "shape": "Marker",
           "name": "Unnamed Layer",
           "category": "default",
-          "type": "PUBLIC"
+          "type": "PUBLIC",
+          "in_polygon" : false
       },
       "geometry": {
           "type": "Point",
@@ -77,7 +79,8 @@ let geojsonFeature = {
           "shape": "Marker",
           "name": "Unnamed Layer",
           "category": "default",
-          "type": "AUTRE"
+          "type": "AUTRE",
+          "in_polygon" : false
       },
       "geometry": {
           "type": "Point",
@@ -90,7 +93,8 @@ let geojsonFeature = {
           "shape": "Marker",
           "name": "Unnamed Layer",
           "category": "default",
-          "type": "AUTRE"
+          "type": "AUTRE",
+          "in_polygon" : false
       },
       "geometry": {
           "type": "Point",
@@ -103,7 +107,8 @@ let geojsonFeature = {
           "shape": "Marker",
           "name": "Unnamed Layer",
           "category": "default",
-          "type": "PUBLIC"
+          "type": "PUBLIC",
+          "in_polygon" : false
       },
       "geometry": {
           "type": "Point",
@@ -116,7 +121,8 @@ let geojsonFeature = {
           "shape": "Marker",
           "name": "Unnamed Layer",
           "category": "default",
-          "type": "COMMERCE"
+          "type": "COMMERCE",
+          "in_polygon" : true
       },
       "geometry": {
           "type": "Point",
@@ -124,6 +130,18 @@ let geojsonFeature = {
       },
       "id": "fd590e75-1098-447e-bccf-7ab618772a64"
   },   
+    {
+        "type": "Feature",
+        "geometry":{
+            "type": "Point",
+            "coordinates": [4.893609, 45.767422]
+        },
+        "properties":
+        {
+            "subType":"Circle",
+            "radius": 2500
+        }
+    }
 ]
 };
 
@@ -131,58 +149,6 @@ let geojsonFeature = {
 
 // Ajout un fichier geoJSON à la carte
 let layers = L.geoJSON(geojsonFeature).addTo(map);
-
-let MyItineraryClass = L.Control.extend(
-    {
-        options: {
-            position: 'topright'
-        },
-
-        onAdd: function(map)
-        {
-            this.map = map;
-
-            let div = L.DomUtil.create('div', 'leaflet-bar my-control');
-
-            let title = L.DomUtil.create('h3', '', div);
-            title.innerHTML = "Filter Itinerary: ";
-
-            let divTypeItin = L.DomUtil.create('div', '', divItin);
-            let inputItin = L.DomUtil.create('input', '', divTypeItin);
-            inputItin.type = "checkbox";
-            inputItin.checked = true;
-            let labelItin = L.DomUtil.create('label', '', divTypeItin);
-            labelItin.innerHTML = " ITINERAIRE";
-
-            var buttonFilter = L.DomUtil.create('button', 'button-class', div);
-            buttonFilter.innerHTML = "Filter Itinerary";
-
-            L.DomEvent.on(buttonFilter, 'click', function() { this.filter(inputItin.checked); }, this);
-
-            return div;
-        },
-
-        filter(inputInit)
-        {
-            map.removeLayer(layers);
-
-            layers = L.geoJSON(geojsonFeature,
-                {
-                    filter: function(feature)
-                    {
-                        if(turf.booleanPointInPolygon(feature.properties.geometry.coordinates, circle) == false)
-                            return false;
-                        return true;
-                    }
-                }
-            ).addTo(map);
-        },
-
-        onRemove: function(map)
-        {
-        }
-    }
-);
 
 
 /*
@@ -228,16 +194,24 @@ onAdd: function(map) {
   let labelBusiness = L.DomUtil.create('label', '', divTypeBusiness);
   labelBusiness.innerHTML = " COMMERCE";
 
+  let divTypeItin = L.DomUtil.create('div', '', divType);
+  let inputItin = L.DomUtil.create('input', '', divTypeItin);
+  inputItin.type = "checkbox";
+  inputItin.checked = true;
+  let labelItin = L.DomUtil.create('label', '', divTypeItin);
+  labelItin.innerHTML = " ITINERAIRE";
+
+
   // Bouton de lancement de l'action de filtrage
   var buttonFilter = L.DomUtil.create('button', 'button-class', div);
   buttonFilter.innerHTML = "Filter";
 
-  L.DomEvent.on(buttonFilter, 'click', function() { this.filter(inputOther.checked, inputPublic.checked, inputBusiness.checked)},this);
+  L.DomEvent.on(buttonFilter, 'click', function() { this.filter(inputOther.checked, inputPublic.checked, inputBusiness.checked, inputItin.checked)},this);
 
   return div;
 },
 
-filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked){
+filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked, inputItinChecked){
 
   map.removeLayer(layers);
 
@@ -253,7 +227,20 @@ filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked){
           else if(feature.properties.type == "COMMERCE" && !inputBusinessChecked) {
            return false;
           }
+          if(feature.properties.in_polygon == false && !inputItinChecked)
+            {
+                /*if(turf.booleanPointInPolygon(feature.properties.geometry.coordinates, circle) == true)
+                {
+                    feature.properties.in_polygon = true;
+                    return false;
+                }*/
+                var in_poly = false;
+
+                    
+            }
+            
           return true;
+
       }
   }).addTo(map);
 },
@@ -283,13 +270,4 @@ onRemove: function(map)
 
 // Ajout de l'interface utilisateur à la carte
 let myControl = new MyControlClass().addTo(map);
-let itineraireControl = new MyItineraryClass().addTo(map);
-
-
-
-//Leaflet.LayerTreeControl
-//Leaflet.StyledLayerControl
-//Leaflet.AccuratePosition (pour la position)
-//Leaflet TripGo routing
-//https://www.targomo.com/developers/documentation/javascript/code_example/
 
