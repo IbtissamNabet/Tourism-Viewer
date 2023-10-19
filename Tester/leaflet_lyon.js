@@ -122,14 +122,14 @@ let geojsonFeature = {
           "name": "Unnamed Layer",
           "category": "default",
           "type": "COMMERCE",
-          "in_polygon" : true
+          "in_polygon" : false
       },
       "geometry": {
           "type": "Point",
           "coordinates": [4.883721, 45.769294]
       },
       "id": "fd590e75-1098-447e-bccf-7ab618772a64"
-  },   
+  }/*,   
     {
         "type": "Feature",
         "geometry":{
@@ -141,7 +141,7 @@ let geojsonFeature = {
             "subType":"Circle",
             "radius": 2500
         }
-    }
+    }*/
 ]
 };
 
@@ -227,16 +227,11 @@ filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked, inputItinChe
           else if(feature.properties.type == "COMMERCE" && !inputBusinessChecked) {
            return false;
           }
-          if(feature.properties.in_polygon == false && !inputItinChecked)
+          if(feature.properties.in_polygon == true && !inputItinChecked) //si c'est false, ça casse tout TT
             {
-                /*if(turf.booleanPointInPolygon(feature.properties.geometry.coordinates, circle) == true)
-                {
-                    feature.properties.in_polygon = true;
+                if(!turf.booleanPointInPolygon(feature.geometry.coordinates, circle) == true)
                     return false;
-                }*/
-                var in_poly = false;
-
-                    
+                
             }
             
           return true;
@@ -249,24 +244,6 @@ onRemove: function(map)
 {
 }
 });
-
-/*filter (polygon) {
-    map.removeLayer(cercle);
-
-    cercle = L.geoJSON(geojsonFeature,
-        {
-            filter: function (feature){
-            if (!turf.booleanPointInPolygon(feature.properties.geometry.coordinates, circle))
-                return false;
-        }
-    }).addTo(map);
-
-onRemove: function(map)
-{
-
-}
-};*/
-
 
 // Ajout de l'interface utilisateur à la carte
 let myControl = new MyControlClass().addTo(map);
