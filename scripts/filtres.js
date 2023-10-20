@@ -57,6 +57,13 @@ for (let bt = 0 ; bt < distinctlieuxgen.length; bt++){
 
 
 
+/* création d'un tableau où seront contenus les soustypes affichés pour ne pas que l'on puisse
+créer de doublons en cliquant trop de fois d'affilé le premier bouton déroulant */
+let distinctlieuxspe = [];
+
+
+
+
 
 /* Pour chacun des boutons de types de lieux, si cliqué, on affiche ses sous-types sous forme également de boutons */
 for (let i = 0 ; i < distinctlieuxgen.length; i++){
@@ -68,7 +75,7 @@ for (let i = 0 ; i < distinctlieuxgen.length; i++){
     let btnLieux = document.getElementById(idtype);
     
     // est ce que le bouton a été cliqué ?
-    btnLieux.addEventListener("dblclick", () => {
+    btnLieux.addEventListener("click", () => {
 
         // on récupère l'emplacement dédié au sous types de ces lieux
         let recupsoustypes = document.querySelector("." + idtype);
@@ -76,13 +83,26 @@ for (let i = 0 ; i < distinctlieuxgen.length; i++){
         for (let j = 0; j < lieux.length; j++){
 
             let idsurtype = lieux[j].ParentLabel.replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-");
+            let idsoustype = lieux[j].Label.replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-");
             let soustype = lieux[j].Label;
             
+            /* on compare si un élément du json est bien une sous catégorie du bouton type sur lequel on a cliqué */
             if(idsurtype === idtype){
-                let butsoustypes = document.createElement("button");
-                butsoustypes.innerText = soustype;
+                /* on vérifie si le soustype de lieu que l'on s'apprète à afficher n'est pas déjà créer */
+                if(! distinctlieuxspe.includes(soustype)){
+                    let butsoustypes = document.createElement("button");
+                    butsoustypes.innerText = soustype;
+                    butsoustypes.id = idsoustype;
 
-                recupsoustypes.appendChild(butsoustypes);
+                    recupsoustypes.appendChild(butsoustypes);
+                    distinctlieuxspe.push(soustype);
+                }
+                /* si le bouton est déjà déroulé alors on le click signifie "remballer la liste" */
+                else{
+                    document.getElementById(idsoustype).remove();
+                    // on supprime l'élement de la liste des éléments affichés
+                    distinctlieuxspe = distinctlieuxspe.filter((lieuxspe)=> lieuxspe !== soustype);
+                }
             }
         }
     })
