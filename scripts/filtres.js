@@ -90,16 +90,28 @@ for (let i = 0 ; i < distinctlieuxgen.length; i++){
             if(idsurtype === idtype){
                 /* on vérifie si le soustype de lieu que l'on s'apprète à afficher n'est pas déjà créer */
                 if(! distinctlieuxspe.includes(soustype)){
-                    let butsoustypes = document.createElement("button");
-                    butsoustypes.innerText = soustype;
+
+                    // création d'une classe pour englober la checkbox et son label et surtout pouvoir les "removve" par la suite
+                    let divsoustypes = document.createElement("div");
+                    divsoustypes.id = "c" + idsoustype;
+                    
+                    // définition de l'input et du type checkbox
+                    let butsoustypes = document.createElement("input");
+                    butsoustypes.type = 'checkbox';
                     butsoustypes.id = idsoustype;
 
-                    recupsoustypes.appendChild(butsoustypes);
+                    // définition du label associé à la checkbox
+                    let namebutsoustypes = document.createElement("label");
+                    namebutsoustypes.innerText = soustype;
+                    
+                    recupsoustypes.appendChild(divsoustypes);
+                    divsoustypes.appendChild(butsoustypes);
+                    divsoustypes.appendChild(namebutsoustypes);
                     distinctlieuxspe.push(soustype);
                 }
                 /* si le bouton est déjà déroulé alors on le click signifie "remballer la liste" */
                 else{
-                    document.getElementById(idsoustype).remove();
+                    document.getElementById("c" + idsoustype).remove();
                     // on supprime l'élement de la liste des éléments affichés
                     distinctlieuxspe = distinctlieuxspe.filter((lieuxspe)=> lieuxspe !== soustype);
                 }
