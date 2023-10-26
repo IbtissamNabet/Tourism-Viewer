@@ -50,6 +50,7 @@ for (let bt = 0 ; bt < distinctlieuxgen.length; bt++){
     /* création de classes en dessous de chaque bouton de types de lieux pour insérer plus tard les sous types de lieux*/
     const butclasses = document.createElement("div");
     butclasses.classList.add(id);
+    butclasses.classList.add('createclass');
 
     recup.appendChild(butclasses);
 }
@@ -94,7 +95,9 @@ for (let i = 0 ; i < distinctlieuxgen.length; i++){
                     // création d'une classe pour englober la checkbox et son label et surtout pouvoir les "removve" par la suite
                     let divsoustypes = document.createElement("div");
                     divsoustypes.id = "c" + idsoustype;
-                    
+                    // uniquement pour le css, espacer la mise en forme
+                    divsoustypes.classList.add("divcheckbox")
+
                     // définition de l'input et du type checkbox
                     let butsoustypes = document.createElement("input");
                     butsoustypes.type = 'checkbox';
