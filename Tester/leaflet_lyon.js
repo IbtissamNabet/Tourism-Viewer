@@ -4,22 +4,22 @@ var map = L.map('map').setView([45.75, 4.85], 13);
 */
 var centerpoint = [45.767422, 4.893609];
 
-var circle = L.circle(centerpoint, { //conserver l'ordre longitude/latitude de Google Maps (I swear I'm done with this)
+/*var circle = L.circle(centerpoint, { //conserver l'ordre longitude/latitude de Google Maps (I swear I'm done with this)
     color: 'white',
     fillColor: '#f03',
     fillOpacity: 0,
     radius: 2500
 }).addTo(map);
+*/
 
 
 
-/**
 var polygon = L.polygon([
-    [45.75, 4.84],
-    [45.77, 4.82],
-    [45.70, 4.80]
+    [45.767422, 4.893609],
+    [45.70,4.9],
+    [45.75, 4.95]
 ]).addTo(map);
-
+/*
 var popup = L.popup();
 ///affiche dans un pop-up les coordonnées s'il n'y a pas de message
 function onMapClick(e) {
@@ -58,7 +58,7 @@ let geojsonFeature = {
           "type": "Point",
           "coordinates": [4.893609 , 45.767422] //quand tu cherches la latitude et la longitude, c'est l'inverse qu'il faut mettre dans les crochets
       },
-      "id": "7c587f8f-6ad8-4638-b831-cb368b3a598d"
+      //"id": "7c587f8f-6ad8-4638-b831-cb368b3a598d"
   }, {
       "type": "Feature",
       "properties": {
@@ -72,7 +72,7 @@ let geojsonFeature = {
           "type": "Point",
           "coordinates": [4.889241, 45.775965]
       },
-      "id": "2367c632-4ce1-4b4e-b705-1f7698dc70d0"
+      //"id": "2367c632-4ce1-4b4e-b705-1f7698dc70d0"
   }, {
       "type": "Feature",
       "properties": {
@@ -86,7 +86,7 @@ let geojsonFeature = {
           "type": "Point",
           "coordinates": [4.88257, 45.78954]
       },
-      "id": "0aade070-1667-4cb2-b22b-b6db4215453d"
+      //"id": "0aade070-1667-4cb2-b22b-b6db4215453d"
   }, {
       "type": "Feature",
       "properties": {
@@ -100,7 +100,7 @@ let geojsonFeature = {
           "type": "Point",
           "coordinates": [4.883753, 45.770472]
       },
-      "id": "6d726c5b-81a0-4a23-b010-43e8cb5c9163"
+      //"id": "6d726c5b-81a0-4a23-b010-43e8cb5c9163"
   }, {
       "type": "Feature",
       "properties": {
@@ -114,7 +114,7 @@ let geojsonFeature = {
           "type": "Point",
           "coordinates": [4.881958, 45.770737]
       },
-      "id": "0a354fb5-37e2-43cf-ab6d-71b4ded70d99"
+      //"id": "0a354fb5-37e2-43cf-ab6d-71b4ded70d99"
   }, {
       "type": "Feature",
       "properties": {
@@ -128,18 +128,13 @@ let geojsonFeature = {
           "type": "Point",
           "coordinates": [4.883721, 45.769294]
       },
-      "id": "fd590e75-1098-447e-bccf-7ab618772a64"
+      //"id": "fd590e75-1098-447e-bccf-7ab618772a64"
   }/*,   
     {
         "type": "Feature",
         "geometry":{
-            "type": "Point",
-            "coordinates": [4.893609, 45.767422]
-        },
-        "properties":
-        {
-            "subType":"Circle",
-            "radius": 2500
+            "type": "Polygon",
+            "coordinates": [[4.893609, 45.767422], [5,46],[4.893609, 45.767422]]
         }
     }*/
 ]
@@ -229,7 +224,7 @@ filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked, inputItinChe
           }
           if(feature.properties.in_polygon == true && !inputItinChecked) //si c'est false, ça casse tout TT
             {
-                if(!turf.booleanPointInPolygon(feature.geometry.coordinates, circle) == true)
+                if(!turf.booleanPointInPolygon(feature.geometry.coordinates, feature.geometry.type) == true)
                     return false;
                 
             }
