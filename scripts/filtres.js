@@ -2,6 +2,7 @@
  * 
  * Ce fichier contient toutes les fonctions
  * nécessaires à la gestion des filtres à appliquer sur la carte
+ * (hors affichage sur carte, filtres liés au popup cf. popup.js)
  * 
  * ****************************************************************
  */
