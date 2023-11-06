@@ -16,11 +16,11 @@ let marker = L.marker([45.767422, 4.893609]).addTo(map);
 marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 
 let popup = L.popup();
-// affiche dans un pop-up les coordonnées s'il n'y a pas de message
+// affiche dans un pop-up les "Nothing Here" s'il n'y a pas de message
 function onMapClick(e) {
     popup
         .setLatLng(e.latlng)
-        .setContent("Nothing there")
+        .setContent("Nothing Here")
         .openOn(map);
 }
 map.on('click', onMapClick);
