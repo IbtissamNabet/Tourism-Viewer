@@ -37,13 +37,9 @@ body {
     flex-direction: column;
 }
 
-.selection-type-lieux button {
-    background-color: var(--color-primary);
-}
-
 .createclass {
     background-color: var(--color-quatre);
-    display: flex;
+    display: none; /* NE PAS CHANGER (cf fichier filtres.js)*/
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
