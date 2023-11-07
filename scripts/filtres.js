@@ -16,15 +16,19 @@ const lieux = await rep.json();
 
 
 /* Tableau qui contiendra les types généraux des lieux */
-let distinctlieuxgen = [];
+let typesLieux = [];
 
-/* Pour tous les éléments de lieux, s'il ne correspond à aucun des éléments de distinct alors on le rajoute à distinct  */
-for (let g = 0; g < lieux.length; g++){
+/* Tableau qui contiendra toutes confondues les sous catégories de lieux */
+let sousTypesLieux = [];
 
-    let types = lieux[g].ParentLabel;
+/* Boucle qui rempli le tableau des types (généraux) de lieux */
+for (let i = 0; i < lieux.length; i++){
 
-    if(! distinctlieuxgen.includes(types))
-    distinctlieuxgen.push(types);
+    let types = lieux[i].ParentLabel;
+
+    /* Pour tous les éléments de lieux, s'il n'est pas
+    déjà pris en compte alors on le rajoute à distinct */
+    if(! typesLieux.includes(types)) typesLieux.push(types);
 }
 
 
@@ -32,94 +36,146 @@ for (let g = 0; g < lieux.length; g++){
 
 
 /* Pour chacun des types généraux de lieux on crée un bouton */
-for (let bt = 0 ; bt < distinctlieuxgen.length; bt++){
-    let bouton = distinctlieuxgen[bt];
+for (let bt = 0 ; bt < typesLieux.length ; bt++){
+    let nomBouton = typesLieux[bt];
 
-    /* remplacement (en enlevant les espaces des labels et les caractères spéciaux) par expression régulière pour identifier les futurs emplacements dans le html */
-    let id = bouton.replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-");
+    /* Création de l'identifiant de chaque bouton en fonction du nom qu'ils afficheront 
+    on y enlève les espaces et les caractères spéciaux par expression régulière */
+    let idBouton = nomBouton.replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-");
 
-    /* on sélectionne l'emplacement des filtres sur la page web */
-    let recup = document.querySelector(".selection-type-lieux");
+    /* On sélectionne l'emplacement des filtres sur la page web */
+    let emplacementBoutons = document.querySelector(".selection-type-lieux");
 
-    let buttypes = document.createElement("button");
-    buttypes.innerText = bouton;
-    /* création d'identifiants */
-    buttypes.id = id;
+    /* On crée et remplit chaque bouton avec son affichage et son idéntifiant */
+    let bouton = document.createElement("button");
+    bouton.innerText = nomBouton;
+    bouton.id = idBouton;
 
-    recup.appendChild(buttypes);
+    emplacementBoutons.appendChild(bouton);
 
-    /* création de classes en dessous de chaque bouton de types de lieux pour insérer plus tard les sous types de lieux*/
-    const butclasses = document.createElement("div");
-    butclasses.classList.add(id);
-    butclasses.classList.add('createclass');
+    
 
-    recup.appendChild(butclasses);
+    /* On crée une classe en dessous de chaque bouton pour pouvoir ranger
+    les sous catégories de lieux en dessous de chaque type */
+    const blocSousType = document.createElement("div");
+    /* Besoin de reconnaître les sous classes entre elles pour les déplier ou non
+    (ps : on rajoute un 'c' devant id car un identifiant est unique) */
+    blocSousType.id = 'c' + idBouton;
+
+    // utilité d'un point de vue css uniquement
+    blocSousType.classList.add('createclass');
+
+    emplacementBoutons.appendChild(blocSousType);
+
+
+
+    /* Boucle pour créer les sous catégories en dessous des boutons de types 
+    (ps : sous forme de checkbox) */
+    for (let k = 0; k < lieux.length; k++){
+        /* On aura besoin de lier chaque sous catégories au type auquel elle est rattaché dans le json */
+        let idSurType = lieux[k].ParentLabel.replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-");
+        /* Chaque checkbox a un identifiant ... */
+        let idSousType = lieux[k].Label.replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-");
+        /* ... et un nom */
+        let nomSousType = lieux[k].Label;
+
+        /* Si la sous catégorie n'est pas déjà notée comme affichée et que l'id du Parent correspond */
+        if(idSurType === idBouton && (! sousTypesLieux.includes(nomSousType))){
+
+            let divSousTypes = document.createElement("div");
+            // uniquement pour le css, boîtes pour mieux distinguer
+            divSousTypes.classList.add("divcheckbox");
+
+            /* Création de la checkbox pour la sous catégorie de lieu */
+            let checkBox = document.createElement("input");
+            checkBox.type = 'checkbox';
+            checkBox.id = idSousType;
+
+            /* Création du label associé à la checkbox */
+            let nameCheckBox = document.createElement("label");
+            nameCheckBox.innerText = nomSousType;
+
+            blocSousType.appendChild(divSousTypes);
+            divSousTypes.appendChild(checkBox);
+            divSousTypes.appendChild(nameCheckBox);
+
+            /* "Note** cette catégorie à été gérée" */
+            sousTypesLieux.push(nomSousType);
+
+        }
+    }
 }
 
 
 
 
-/* création d'un tableau où seront contenus les soustypes affichés pour ne pas que l'on puisse
-créer de doublons en cliquant trop de fois d'affilé le premier bouton déroulant */
-let distinctlieuxspe = [];
 
+/* Boucle pour la gestion du clic de chaque bouton */
+for (let j = 0; j < typesLieux.length; j++){
+    /* On recupère l'id correspondant à chaque bouton pour pouvoir récupérer l'action "click" propre à chacun */
+    let idBoutonLieu = typesLieux[j].replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-");
+    /* On récupère le bouton en question */
+    let BoutonLieu = document.getElementById(idBoutonLieu);
+    /* On récupère la classe rattachée au bouton, qui elle, va se dérouler ou se re enrouler à chaque click */
+    let rangementSousTypes = document.getElementById("c" + idBoutonLieu);
 
-
-
-
-/* Pour chacun des boutons de types de lieux, si cliqué, on affiche ses sous-types sous forme également de boutons */
-for (let i = 0 ; i < distinctlieuxgen.length; i++){
-
-    // réécriture de l'élément sous forme d'id
-    let idtype = distinctlieuxgen[i].replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-");
-
-    // on récupère le bouton que l'on veut vérifier
-    let btnLieux = document.getElementById(idtype);
-    
-    // est ce que le bouton a été cliqué ?
-    btnLieux.addEventListener("click", () => {
-
-        // on récupère l'emplacement dédié au sous types de ces lieux
-        let recupsoustypes = document.querySelector("." + idtype);
-
-        for (let j = 0; j < lieux.length; j++){
-
-            let idsurtype = lieux[j].ParentLabel.replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-");
-            let idsoustype = lieux[j].Label.replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-");
-            let soustype = lieux[j].Label;
-            
-            /* on compare si un élément du json est bien une sous catégorie du bouton type sur lequel on a cliqué */
-            if(idsurtype === idtype){
-                /* on vérifie si le soustype de lieu que l'on s'apprète à afficher n'est pas déjà créer */
-                if(! distinctlieuxspe.includes(soustype)){
-
-                    // création d'une classe pour englober la checkbox et son label et surtout pouvoir les "removve" par la suite
-                    let divsoustypes = document.createElement("div");
-                    divsoustypes.id = "c" + idsoustype;
-                    // uniquement pour le css, espacer la mise en forme
-                    divsoustypes.classList.add("divcheckbox")
-
-                    // définition de l'input et du type checkbox
-                    let butsoustypes = document.createElement("input");
-                    butsoustypes.type = 'checkbox';
-                    butsoustypes.id = idsoustype;
-
-                    // définition du label associé à la checkbox
-                    let namebutsoustypes = document.createElement("label");
-                    namebutsoustypes.innerText = soustype;
-                    
-                    recupsoustypes.appendChild(divsoustypes);
-                    divsoustypes.appendChild(butsoustypes);
-                    divsoustypes.appendChild(namebutsoustypes);
-                    distinctlieuxspe.push(soustype);
-                }
-                /* si le bouton est déjà déroulé alors on le click signifie "remballer la liste" */
-                else{
-                    document.getElementById("c" + idsoustype).remove();
-                    // on supprime l'élement de la liste des éléments affichés
-                    distinctlieuxspe = distinctlieuxspe.filter((lieuxspe)=> lieuxspe !== soustype);
-                }
-            }
-        }
+    BoutonLieu.addEventListener("click", () => {
+        /* Si les sous catégories sont affichées, on les cache, sinon on les affiche */
+        if(getComputedStyle(rangementSousTypes).display != "none"){
+            rangementSousTypes.style.display = "none";
+          } else {
+            rangementSousTypes.style.display = "flex";
+          }
     })
 }
+
+
+
+
+
+let checkkk = document.querySelectorAll("input[type = checkbox]");
+
+checkkk.forEach(function (checkbox) {
+    checkbox.addEventListener('change', () => {
+        console.log("changed");
+    }
+    )
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Select all checkboxes with the name 'settings' using querySelectorAll.
+var checkboxes = document.querySelectorAll("input[type=checkbox][name=settings]");
+let enabledSettings = []
+
+/*
+For IE11 support, replace arrow functions with normal functions and
+use a polyfill for Array.forEach:
+https://vanillajstoolkit.com/polyfills/arrayforeach/
+*/
+
+// Use Array.forEach to add an event listener to each checkbox.
+checkboxes.forEach(function(checkbox) {
+  checkbox.addEventListener('change', function() {
+    enabledSettings = 
+      Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
+      .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
+      .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
+      
+    console.log(enabledSettings)
+  })
+});
