@@ -41,7 +41,7 @@ for (let bt = 0 ; bt < typesLieux.length ; bt++){
 
     /* Création de l'identifiant de chaque bouton en fonction du nom qu'ils afficheront 
     on y enlève les espaces et les caractères spéciaux par expression régulière */
-    let idBouton = nomBouton.replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-").replace(/\(.*?\)/g,'');
+    let idBouton = nomBouton.replaceAll(/\s|`|"|‘|'|,|\(.*?\)/g,'-');
 
     /* On sélectionne l'emplacement des filtres sur la page web */
     let emplacementBoutons = document.querySelector(".selection-type-lieux");
@@ -73,9 +73,9 @@ for (let bt = 0 ; bt < typesLieux.length ; bt++){
     (ps : sous forme de checkbox) */
     for (let k = 0; k < lieux.length; k++){
         /* On aura besoin de lier chaque sous catégories au type auquel elle est rattaché dans le json */
-        let idSurType = lieux[k].ParentLabel.replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-").replace(/\(.*?\)/g,'');
+        let idSurType = lieux[k].ParentLabel.replaceAll(/\s|`|"|‘|'|,|\(.*?\)/g,'-');
         /* Chaque checkbox a un identifiant ... */
-        let idSousType = lieux[k].Label.replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-").replace(/\(.*?\)/g,'');
+        let idSousType = lieux[k].Label.replaceAll(/\s|`|"|‘|'|,|\(.*?\)/g,'-');
         /* ... et un nom */
         let nomSousType = lieux[k].Label;
 
@@ -113,7 +113,7 @@ for (let bt = 0 ; bt < typesLieux.length ; bt++){
 /* Boucle pour la gestion du clic de chaque bouton */
 for (let j = 0; j < typesLieux.length; j++){
     /* On recupère l'id correspondant à chaque bouton pour pouvoir récupérer l'action "click" propre à chacun */
-    let idBoutonLieu = typesLieux[j].replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-").replace(/\(.*?\)/g,'');
+    let idBoutonLieu = typesLieux[j].replaceAll(/\s|`|"|‘|'|,|\(.*?\)/g,'-');
     /* On récupère le bouton en question */
     let BoutonLieu = document.getElementById(idBoutonLieu);
     /* On récupère la classe rattachée au bouton, qui elle, va se dérouler ou se re enrouler à chaque click */
@@ -135,7 +135,7 @@ for (let j = 0; j < typesLieux.length; j++){
 
 for (let c = 0; c < sousTypesLieux.length ; c++){
     /* Pour chaque catégories du tableau on prend son équivalent en tant qu'identifiant */
-    let idCheckBox = sousTypesLieux[c].replace(/\s/g,'-').replace(/`|"|‘|'|,/g,"-").replace(/\(.*?\)/g,'');
+    let idCheckBox = sousTypesLieux[c].replaceAll(/\s|`|"|‘|'|,|\(.*?\)/g,'-');
 
     let check = document.querySelector("input[type = checkbox][id = " + idCheckBox + "]");
     check.addEventListener('change', () => {
