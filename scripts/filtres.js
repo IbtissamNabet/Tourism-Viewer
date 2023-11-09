@@ -133,15 +133,29 @@ for (let j = 0; j < typesLieux.length; j++){
 
 
 
+/* Tableau qui contiendra tous les types qui sont actuellement cochés (checkbox.checked = true)
+(c'est le tableau récupéré par python pour renvoyer les infos des lieux à afficher) */
+let sousTypesSelectionnes = [];
 
 for (let c = 0; c < sousTypesLieux.length ; c++){
+    let nomCheckBox = sousTypesLieux[c];
     /* Pour chaque catégories du tableau on prend son équivalent en tant qu'identifiant */
     let idCheckBox = sousTypesLieux[c].replaceAll(/\s|`|"|‘|'|,|\(.*?\)/g,'-');
 
     let check = document.querySelector("input[type = checkbox][id = " + idCheckBox + "]");
     check.addEventListener('change', () => {
-        if(check.checked) console.log("est coché");
-        else console.log("est décoché");
+        if(check.checked){
+            /* Cases cochée > on l'ajoute dans le tableau dédié */
+            sousTypesSelectionnes.push(nomCheckBox);
+            console.log(nomCheckBox + " est coché"); // pour info dans la console
+            console.log(sousTypesSelectionnes); // pour info dans la console
+        }
+        else{
+            /* Lorsque que l'on décoche une case on l'enlève du tableau qui répertorie les cases cochées */
+            sousTypesSelectionnes = sousTypesSelectionnes.filter((lieuxspe)=> lieuxspe !== nomCheckBox);
+            console.log(nomCheckBox + " est décoché"); // pour info dans la console
+            console.log(sousTypesSelectionnes); // pour info dans la console
+        }
     })
 }
 

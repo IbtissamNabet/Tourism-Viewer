@@ -17,3 +17,5 @@ dans mysql :
 USE carte_db;
 show tables;
 >>>>> requêtes sql
+
+SHOW COLUMNS FROM POI;
