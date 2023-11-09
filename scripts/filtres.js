@@ -147,17 +147,14 @@ for (let c = 0; c < sousTypesLieux.length ; c++){
         if(check.checked){
             /* Cases cochée > on l'ajoute dans le tableau dédié */
             sousTypesSelectionnes.push(nomCheckBox);
-            console.log(nomCheckBox + " est coché"); // pour info dans la console
-            console.log(sousTypesSelectionnes); // pour info dans la console
         }
         else{
             /* Lorsque que l'on décoche une case on l'enlève du tableau qui répertorie les cases cochées */
             sousTypesSelectionnes = sousTypesSelectionnes.filter((lieuxspe)=> lieuxspe !== nomCheckBox);
-            console.log(nomCheckBox + " est décoché"); // pour info dans la console
-            console.log(sousTypesSelectionnes); // pour info dans la console
         }
     })
 }
+
 
 
 
@@ -173,4 +170,6 @@ reset.addEventListener('click', () => {
         /* On décoche toutes les checkbox */
         checks.checked = false;
     }
+    /* On vide (évidemment) le tableau qui contient les types cochés lorsque l'on à décoché toutes les cases */
+    sousTypesSelectionnes = [];
 })
