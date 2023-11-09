@@ -1,8 +1,7 @@
 var map = L.map('map').setView([45.75, 4.85], 13);
 
-/**var marker = L.marker([45.75, 4.85]).addTo(map);
-*/
-var centerpoint = [45.767422, 4.893609];
+//var marker = L.marker([45.75, 4.85]).addTo(map);
+//var centerpoint = [45.767422, 4.893609];
 
 /*var circle = L.circle(centerpoint, { //conserver l'ordre longitude/latitude de Google Maps (I swear I'm done with this)
     color: 'white',
@@ -14,12 +13,13 @@ var centerpoint = [45.767422, 4.893609];
 
 
 
-var polygon = L.polygon([
+var polygon = turf.polygon([[
     [45.775965 + 0.02, 4.889241 + 0.02],
     [45.775965 + 0.02, 4.889241 -0.02],
     [45.775965 - 0.02, 4.889241 -0.02],
-    [45.775965 - 0.02, 4.889241 + 0.02]
-]).addTo(map);
+    [45.775965 - 0.02, 4.889241 + 0.02],
+    [45.775965 + 0.02, 4.889241 + 0.02]]]
+);
 /*
 var popup = L.popup();
 ///affiche dans un pop-up les coordonnées s'il n'y a pas de message
@@ -59,7 +59,6 @@ let geojsonFeature = {
           "type": "Point",
           "coordinates": [4.893609 , 45.767422] //quand tu cherches la latitude et la longitude, c'est l'inverse qu'il faut mettre dans les crochets
       },
-      //"id": "7c587f8f-6ad8-4638-b831-cb368b3a598d"
   }, {
       "type": "Feature",
       "properties": {
@@ -73,7 +72,6 @@ let geojsonFeature = {
           "type": "Point",
           "coordinates": [4.889241, 45.775965]
       },
-      //"id": "2367c632-4ce1-4b4e-b705-1f7698dc70d0"
   }, {
       "type": "Feature",
       "properties": {
@@ -87,7 +85,6 @@ let geojsonFeature = {
           "type": "Point",
           "coordinates": [4.88257, 45.78954]
       },
-      //"id": "0aade070-1667-4cb2-b22b-b6db4215453d"
   }, {
       "type": "Feature",
       "properties": {
@@ -101,7 +98,6 @@ let geojsonFeature = {
           "type": "Point",
           "coordinates": [4.883753, 45.770472]
       },
-      //"id": "6d726c5b-81a0-4a23-b010-43e8cb5c9163"
   }, {
       "type": "Feature",
       "properties": {
@@ -115,7 +111,6 @@ let geojsonFeature = {
           "type": "Point",
           "coordinates": [4.881958, 45.770737]
       },
-      //"id": "0a354fb5-37e2-43cf-ab6d-71b4ded70d99"
   }, {
       "type": "Feature",
       "properties": {
@@ -129,7 +124,6 @@ let geojsonFeature = {
           "type": "Point",
           "coordinates": [4.883721, 45.769294]
       },
-      //"id": "fd590e75-1098-447e-bccf-7ab618772a64"
   }/*,   
     {
         "type": "Feature",
@@ -214,6 +208,18 @@ filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked, inputItinChe
   layers = L.geoJSON(geojsonFeature,
   {
       filter: function (feature) {
+          if(!feature.properties.in_polygon && !inputItinChecked)
+            {
+                if(turf.booleanPointInPolygon(feature.geometry.coordinates,polygon))
+                   {
+                    feature.properties.in_polygon = true;
+                   } 
+                else 
+                {
+                    return true;
+                }
+                    
+            }
           if(feature.properties.type == "AUTRE" && !inputOtherChecked) {
            return false;
           }
@@ -223,12 +229,7 @@ filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked, inputItinChe
           else if(feature.properties.type == "COMMERCE" && !inputBusinessChecked) {
            return false;
           }
-          if(feature.properties.in_polygon == true && !inputItinChecked) //si c'est false, ça casse tout TT
-            {
-                if(!turf.booleanPointInPolygon(feature.geometry.coordinates, feature.geometry.type) == true)
-                    return false;
-                
-            }
+          
             
           return true;
 
@@ -240,6 +241,7 @@ onRemove: function(map)
 {
 }
 });
+
 
 // Ajout de l'interface utilisateur à la carte
 let myControl = new MyControlClass().addTo(map);
