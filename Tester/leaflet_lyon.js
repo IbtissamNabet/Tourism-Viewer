@@ -208,18 +208,7 @@ filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked, inputItinChe
   layers = L.geoJSON(geojsonFeature,
   {
       filter: function (feature) {
-          if(!feature.properties.in_polygon && !inputItinChecked)
-            {
-                if(turf.booleanPointInPolygon(feature.geometry.coordinates,polygon))
-                   {
-                    feature.properties.in_polygon = true;
-                   } 
-                else 
-                {
-                    return true;
-                }
-                    
-            }
+          
           if(feature.properties.type == "AUTRE" && !inputOtherChecked) {
            return false;
           }
@@ -229,6 +218,20 @@ filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked, inputItinChe
           else if(feature.properties.type == "COMMERCE" && !inputBusinessChecked) {
            return false;
           }
+
+          if(feature.properties.in_polygon && !inputItinChecked)
+            {
+                if(turf.booleanPointInPolygon(feature.geometry.coordinates,polygon))
+                   {
+                    feature.properties.in_polygon = false;
+                    return false;
+                   } 
+                else 
+                {
+                    feature.properties.in_polygon = true;
+                }
+                    
+            }
           
             
           return true;
