@@ -1,53 +1,19 @@
 couleur du site en fonction des saisons
 
 
+se connecter sur le serveur sql : 
+ssh lazeurone@lif.sci-web.net
+password : lifprojet
 
 
 
-recuperer les noms sous forme de listeMots
-
-id = nom sans les espaces
-
-- class="selection-type-lieux"
-boucle for >>
-insertion button pour chaque types de lieux
-
-nom_t1 nom_t2
-recup nom_t2 le groupe global
-
-recup nom_t1 pour la sous classe
-> autre formation de buttons
+dans le serveur :
+mysql -u root -p
+password : 12062003
+exit
 
 
-
-
-
-
-
-pour filtres.js
-/**
- *   element.addEventListener("click", this, false);
-     element.addEventListener("dblclick", this, false);
- * click normal ou double clique pour différencier l'ouverture ou fermeture des onglets ?
- */
-
-
-pour filtres.js
-/**
- * Peut servir (fonctionnel)
-
-// Tableau qui contiendra les types spécifiques des lieux
-let distinctlieuxspe = [];
-
-// Pour tous les éléments Label de lieux, s'il ne correspond à aucun des éléments de distinct alors on le rajoute à distinct
-for (let i = 0; i < lieux.length; i++){
-
-    let types = lieux[i].Label;
-
-    if(! distinctlieuxspe.includes(types))
-        distinctlieuxspe.push(types);
-}
-
-// console.log(distinctlieuxspe);
-
-*/
+dans mysql :
+USE carte_db;
+show tables;
+>>>>> requêtes sql

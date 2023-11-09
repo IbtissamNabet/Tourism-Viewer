@@ -90,6 +90,7 @@ for (let bt = 0 ; bt < typesLieux.length ; bt++){
             let checkBox = document.createElement("input");
             checkBox.type = 'checkbox';
             checkBox.id = idSousType;
+            checkBox.checked = false;
 
             /* Création du label associé à la checkbox */
             let nameCheckBox = document.createElement("label");
@@ -143,3 +144,19 @@ for (let c = 0; c < sousTypesLieux.length ; c++){
         else console.log("est décoché");
     })
 }
+
+
+
+
+/* On récupère le bouton de réinitialisation */
+let reset = document.getElementById("reset");
+
+reset.addEventListener('click', () => {
+    for (let r = 0; r < sousTypesLieux.length; r++){
+        let idCheckBox = sousTypesLieux[r].replaceAll(/\s|`|"|‘|'|,|\(.*?\)/g,'-');
+
+        let checks = document.querySelector("input[type = checkbox][id = " + idCheckBox + "]");
+        /* On décoche toutes les checkbox */
+        checks.checked = false;
+    }
+})
