@@ -25,16 +25,15 @@ body {
     border-radius: 0px 35px 0px 35px;
 }
 
-.itineraire {
+.itineraire, .selection-type-lieux {
     padding: 20px;
     display: flex;
     flex-direction: column;
 }
 
-.selection-type-lieux {
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+#reset {
+    margin: 20px;
+    float: right;
 }
 
 .createclass {
