@@ -166,7 +166,17 @@ const infos = await repInfos.json();
 
 /* Pour tout les lieux on affiche un popup */
 for(let t = 0; t < infos.length; t++){
-    L.marker([infos[t].Latitude,infos[t].Longitude]).addTo(map);
+    let nomLieu = infos[t].Nom_du_POI;
+    let adressePostale = infos[t].Adresse_postale + " " + infos[t].Code_postal + " " + infos[t].Commune;
+    let numTel = infos[t].Telephone;
+    let email = infos[t].Mail;
+    let siteWeb = infos[t].Site_web;
+    let description = infos[t].Description;
+    let marker = L.marker([infos[t].Latitude,infos[t].Longitude]).addTo(map);
+    marker.bindPopup(
+        "<h1>" + nomLieu + "</h1>" + 
+        "<h2>contacts</h2>" + numTel + "<br>" + email + "<br>" + siteWeb +
+        "<h2>adresse</h2>" + adressePostale);
 }
 
 
