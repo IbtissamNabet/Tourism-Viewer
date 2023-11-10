@@ -11,15 +11,31 @@ var map = L.map('map').setView([45.75, 4.85], 13);
 }).addTo(map);
 */
 
+var poly = L.polygon([[
+    [45.775965 + 0.01, 4.889241 + 0.01],
+    [45.775965 + 0.01, 4.889241 -0.01],
+    [45.775965 - 0.01, 4.889241 -0.01],
+    [45.775965 - 0.01, 4.889241 + 0.01],
+    [45.775965 + 0.01, 4.889241 + 0.01]]]
+).addTo(map);
 
 
-var polygon = turf.polygon([[
+/**var polygon = turf.polygon([[
     [45.775965 + 0.02, 4.889241 + 0.02],
     [45.775965 + 0.02, 4.889241 -0.02],
     [45.775965 - 0.02, 4.889241 -0.02],
     [45.775965 - 0.02, 4.889241 + 0.02],
     [45.775965 + 0.02, 4.889241 + 0.02]]]
+);*/
+
+var polygon = turf.polygon([[
+    [45.775965 + 0.01, 4.889241 + 0.01],
+    [45.775965 + 0.01, 4.889241 -0.01],
+    [45.775965 - 0.01, 4.889241 -0.01],
+    [45.775965 - 0.01, 4.889241 + 0.01],
+    [45.775965 + 0.01, 4.889241 + 0.01]]]
 );
+
 /*
 var popup = L.popup();
 ///affiche dans un pop-up les coordonnées s'il n'y a pas de message
@@ -53,7 +69,7 @@ let geojsonFeature = {
           "name": "Unnamed Layer",
           "category": "default",
           "type": "COMMERCE",
-          "in_polygon" : false
+          "in_polygon" : true
       },
       "geometry": {
           "type": "Point",
@@ -66,7 +82,7 @@ let geojsonFeature = {
           "name": "Unnamed Layer",
           "category": "default",
           "type": "PUBLIC",
-          "in_polygon" : false
+          "in_polygon" : true
       },
       "geometry": {
           "type": "Point",
@@ -79,7 +95,7 @@ let geojsonFeature = {
           "name": "Unnamed Layer",
           "category": "default",
           "type": "AUTRE",
-          "in_polygon" : false
+          "in_polygon" : true
       },
       "geometry": {
           "type": "Point",
@@ -92,7 +108,7 @@ let geojsonFeature = {
           "name": "Unnamed Layer",
           "category": "default",
           "type": "AUTRE",
-          "in_polygon" : false
+          "in_polygon" : true
       },
       "geometry": {
           "type": "Point",
@@ -105,7 +121,7 @@ let geojsonFeature = {
           "name": "Unnamed Layer",
           "category": "default",
           "type": "PUBLIC",
-          "in_polygon" : false
+          "in_polygon" : true
       },
       "geometry": {
           "type": "Point",
@@ -118,20 +134,13 @@ let geojsonFeature = {
           "name": "Unnamed Layer",
           "category": "default",
           "type": "COMMERCE",
-          "in_polygon" : false
+          "in_polygon" : true
       },
       "geometry": {
           "type": "Point",
           "coordinates": [4.883721, 45.769294]
       },
-  }/*,   
-    {
-        "type": "Feature",
-        "geometry":{
-            "type": "Polygon",
-            "coordinates": [[4.893609, 45.767422], [5,46],[4.893609, 45.767422]]
-        }
-    }*/
+  }
 ]
 };
 
@@ -139,6 +148,12 @@ let geojsonFeature = {
 
 // Ajout un fichier geoJSON à la carte
 let layers = L.geoJSON(geojsonFeature).addTo(map);
+
+//var layerForDelete = L.geoJSON();
+//layerForDelete.addData(geojsonFeature);
+
+//baseMap = selectedTile pour la carte de base
+
 
 
 /*
@@ -221,16 +236,24 @@ filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked, inputItinChe
 
           if(feature.properties.in_polygon && !inputItinChecked)
             {
-                if(turf.booleanPointInPolygon(feature.geometry.coordinates,polygon))
-                   {
-                    feature.properties.in_polygon = false;
-                    return false;
-                   } 
-                else 
+                 
+                if(feature.properties.in_polygon && !inputItinChecked)
                 {
-                    feature.properties.in_polygon = true;
-                }
+                    layers.eachLayer(function(layer)
+                    {
+                        if (!turf.booleanPointInPolygon(feature.geometry.coordinates,polygon))
+                        {
+                            feature.properties.in_polygon = false;
+                            layer.deleteFeature(layer.feature.geometry.type);
+                        }
+
+                        return turf.booleanPointInPolygon(feature.geometry.coordinates,polygon);
+                    });
                     
+                }
+
+                return feature.properties.in_polygon;
+                
             }
           
             
