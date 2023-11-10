@@ -164,11 +164,9 @@ for (let c = 0; c < sousTypesLieux.length ; c++){
 const repInfos = await fetch('json/data_idf.json'); // à changer !
 const infos = await repInfos.json();
 
-console.log(infos);
-
 /* Pour tout les lieux on affiche un popup */
 for(let t = 0; t < infos.length; t++){
-    L.marker([infos[t].Latitude,infos[t].Longitude]);
+    L.marker([infos[t].Latitude,infos[t].Longitude]).addTo(map);
 }
 
 
