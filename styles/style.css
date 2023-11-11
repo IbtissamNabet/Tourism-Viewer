@@ -8,6 +8,13 @@ body {
     color: var(--color-primary);
 }
 
+/* Pour les popup et leur infos */
+h3 {
+    color: var(--color-tertiary);
+    margin-bottom: 5px;
+    font-size: 17px;
+}
+
 #logo {
     width:2em;
     height: 2em;

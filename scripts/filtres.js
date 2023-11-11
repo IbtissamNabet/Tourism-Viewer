@@ -160,23 +160,56 @@ for (let c = 0; c < sousTypesLieux.length ; c++){
 
 
 
-// on récupère les données qui correspondent à tous les lieux qui ont leur type coché
+/* On récupère les données qui correspondent à tous les lieux qui ont leur type coché */
 const repInfos = await fetch('json/data_idf.json'); // à changer !
 const infos = await repInfos.json();
 
 /* Pour tout les lieux on affiche un popup */
 for(let t = 0; t < infos.length; t++){
+    /* Affichage du pointeur sur la carte */
+    let marker = L.marker([infos[t].Latitude,infos[t].Longitude]).addTo(map);
+
     let nomLieu = infos[t].Nom_du_POI;
-    let adressePostale = infos[t].Adresse_postale + " " + infos[t].Code_postal + " " + infos[t].Commune;
+
+    /* On récupère chaque élément de l'adresse complète */
+    let adressePostale = infos[t].Adresse_postale;
+    let codePostal = infos[t].Code_postal;
+    let commune = infos[t].Commune;
+
+    /* On ne construit l'adresse qu'en fonction des éléments présent dans la base de données */
+    let adresse = "";
+    if(!adressePostale){adresse += codePostal + " " + commune;}
+    else{adresse = adressePostale + "<br>" + codePostal + " " + commune;}
+
+
+    /* On récupère chaque moyen de contact */
     let numTel = infos[t].Telephone;
     let email = infos[t].Mail;
     let siteWeb = infos[t].Site_web;
+
+    /* Idem que pour l'adresse */
+    let contact = "";
+    if(numTel) contact += numTel + "<br>";
+    if(email) contact += email + "<br>";
+    if(siteWeb) contact += "<a>" + siteWeb + "</a>";
+
+
+
     let description = infos[t].Description;
-    let marker = L.marker([infos[t].Latitude,infos[t].Longitude]).addTo(map);
-    marker.bindPopup(
-        "<h1>" + nomLieu + "</h1>" + 
-        "<h2>contacts</h2>" + numTel + "<br>" + email + "<br>" + siteWeb +
-        "<h2>adresse</h2>" + adressePostale);
+
+
+
+    /* Tests finaux des fois rien du tout n'est renseigné (surtout dans contacts et description) */
+    let infosPopup = "<h2>" + nomLieu + "</h2>";
+    if(contact) infosPopup += "<h3>contacts</h3>" + contact;
+    if(adresse) infosPopup += "<h3>adresse</h3>" + adresse;
+    if(description) infosPopup += "<h3>description</h3>" + description;
+
+    
+
+    /* Affichage popup avec infos */
+    marker.bindPopup(infosPopup);
+
 }
 
 
