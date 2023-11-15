@@ -79,6 +79,7 @@ h3 {
     width: 80%;
     z-index: 0;
     border-radius: 35px 0px 35px 0px;
+    color: black; /* Pour l'affichage des noms de l'itinéraire */
 }
 
 a {

@@ -21,9 +21,15 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""></script>
 
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+        <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
         <script type="text/javascript" src="scripts/map.js" defer></script>
         <script type="module" src="scripts/filtres.js"></script>
         <script type="module" src="scripts/popup.js"></script>
+        <script type="module" src="scripts/itineraire.js"></script>
 
     </head>
 
@@ -45,10 +51,9 @@
                 <section class="filtres-map">
                     <h1>Itinéraire</h1>
                     <div class="itineraire">
-                        <label for="depart">Départ</label>
-                        <input type="text" name="itineraire" id="depart" placeholder="Choose on the map">
-                        <label for="arrivee">Arrivée</label>
-                        <input type="text" name="itineraire" id="arrivee" placeholder="Choose on the map">
+                        <button id="itineraire">Choisir un itinéraire</button>
+                        <h4>Départ</h4>
+                        <h4>Arrivée</h4>
                     </div>
                     <h1>Filtres</h1>
                     <div class="selection-type-lieux">
