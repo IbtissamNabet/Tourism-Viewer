@@ -1,48 +1,35 @@
 let boutonItineraire = document.getElementById("itineraire");
 
 boutonItineraire.addEventListener('click', () => {
-  console.log("btn itin");
-  /* Contient latitude et longitude des points aux extrémités de l'itinéraire */
+
+  /* On initialise le nombre de clics sur la carte pour ne laisser 
+  à l'utilisateur le choix que de choisir un déaprt et une arrivée */
+  let nbclick = 0;
+
+  /* Contient latitude et longitude des points aux extrémités de l'itinéraire 
+  pour le côté backend qui renverra seulement les points autour de l'itinéraire */
   let coordonnees = [];
 
-  /* On cherche à faire cliquer l'utilisateur uniquement deux fois pour Départ et Arrivée */
-  for(let i = 0; i < 2; i++){
+  let el1, el2;
 
-    /* On récuperera dans le tableau les positions de clics */
-    function onMapClick(e) {
-      coordonnees.push(e.latlng.lat);
-      coordonnees.push(e.latlng.lng);
+  map.on('click', function(e){
+    nbclick ++;
+    /* Lors du premier click sur la map on récupère les coordonnées du premier repère */
+    if(nbclick == 1){
+      el1 = e.latlng;
     }
-
-    map.on('click', onMapClick);
-  }
-
-  console.log(coordonnees);
-  // problème pour récupérer les coordonnées du tableau
-
-
-  /* On affiche l'itinéraire en fonction des coordonnées de l'arrivée et du départ */
-  L.Routing.control({
-      waypoints: [
-        L.latLng(57.74, 11.94),
-        L.latLng(57.6792, 11.949)
-      ]
-    }).addTo(map);
+    /* Lors du premier click sur la map on récupère les coordonnées du premier repère 
+    ET on affiche l'itinéraire */
+    if(nbclick == 2){
+      el2 = e.latlng;
+      L.Routing.control({
+        waypoints: [
+          L.latLng(el1),
+          L.latLng(el2)
+        ]
+      }).addTo(map);
+    /* Rajout pour la réception des popup dans la zone */
+    coordonnees = [el1.lat, el1.lng, el2.lat, el2.lng];
+    }
+  });
 })
-
-
-
-
-
-
-
-
-
-
-
-/*
-https://nouvelle-techno.fr/articles/openstreetmap-creer-des-itineraires
-https://www.liedman.net/leaflet-routing-machine/#getting-started
-https://www.developpez.net/forums/d1596395/javascript/bibliotheques-frameworks/recuperer-coordonnees-d-marqueur-apres-qu-soit-place/
-https://www.aliasdmc.fr/coursjavas/cours_javascript76.html
-*/
