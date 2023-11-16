@@ -39,6 +39,19 @@ boutonItineraire.addEventListener('click', () => {
   });
 })
 
+let boutonOnItineraire = document.getElementById('onItineraire');
+boutonOnItineraire.checked = false;
+let boutonOffItineraire = document.getElementById('offItineraire');
+boutonOffItineraire.check = true;
+
+boutonOnItineraire.addEventListener('change', () => {
+  boutonOffItineraire.checked = false;
+})
+
+boutonOffItineraire.addEventListener('change', () => {
+  boutonOnItineraire.checked = false;
+})
+
 
 
 
