@@ -1,15 +1,7 @@
 var map = L.map('map').setView([45.75, 4.85], 13);
 
 //var marker = L.marker([45.75, 4.85]).addTo(map);
-//var centerpoint = [45.767422, 4.893609];
 
-/*var circle = L.circle(centerpoint, { //conserver l'ordre longitude/latitude de Google Maps (I swear I'm done with this)
-    color: 'white',
-    fillColor: '#f03',
-    fillOpacity: 0,
-    radius: 2500
-}).addTo(map);
-*/
 
 var poly = L.polygon([[
     [45.775965 + 0.01, 4.889241 + 0.01],
@@ -154,7 +146,19 @@ let layers = L.geoJSON(geojsonFeature).addTo(map);
 
 //baseMap = selectedTile pour la carte de base
 
+//let mapId = {};
+/*let geo = L.geoJSON(geojsonFeature,{
+    onEachFeature: function(feature,layer)
+    {
+        mapId[feature.geometry.coordinates] = L.stamp(layer);
+        console.log(L.stamp(layer));
+    }
+}).addTo(map);*/
 
+console.log(mapId);
+for (var key in mapId){
+    console.log(key);
+}
 
 /*
  * Classe gérant l'interface utilisateur de filtrage
@@ -164,6 +168,7 @@ let MyControlClass =  L.Control.extend({
   options: {
     position: 'topleft'
   },
+  
 
 onAdd: function(map) {
 
@@ -220,41 +225,52 @@ filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked, inputItinChe
 
   map.removeLayer(layers);
 
+  let mapId = {};
+
   layers = L.geoJSON(geojsonFeature,
   {
+    
+    onEachFeature: function(feature,layer)
+    {
+        mapId[feature.geometry.coordinates] = L.stamp(layer);
+        console.log(L.stamp(layer));
+    },
+
       filter: function (feature) {
+                
           
-          if(feature.properties.type == "AUTRE" && !inputOtherChecked) {
+          if(feature.properties.type == "AUTRE" && !inputOtherChecked ) {
+            for (var key in mapId)
+            {
+                if (mapId[key] == feature.geometry.coordinates)
+                map.removeLayer(geo.getLayer(mapID[key]));
+            }
            return false;
           }
-          else if(feature.properties.type == "PUBLIC" && !inputPublicChecked) {
+          else if(feature.properties.type == "PUBLIC" && !inputPublicChecked && mapID[0] == feature.geometry.coordinates) {
            return false;
           }
-          else if(feature.properties.type == "COMMERCE" && !inputBusinessChecked) {
+          else if(feature.properties.type == "COMMERCE" && !inputBusinessChecked && mapID[0] == feature.geometry.coordinates) {
            return false;
           }
 
           if(feature.properties.in_polygon && !inputItinChecked)
+           {
+            //convertir les coordonnées sous le même format que le polygone
+            var coord = [feature.geometry.coordinates[1],feature.geometry.coordinates[0]];
+            
+            console.log(feature.properties.type);
+            console.log(coord);
+            console.log(polygon.properties);
+            console.log(turf.booleanPointInPolygon(coord,polygon));
+            if (turf.booleanPointInPolygon(coord,polygon) == false)
             {
-                 
-                if(feature.properties.in_polygon && !inputItinChecked)
-                {
-                    layers.eachLayer(function(layer)
-                    {
-                        if (!turf.booleanPointInPolygon(feature.geometry.coordinates,polygon))
-                        {
-                            feature.properties.in_polygon = false;
-                            layer.deleteFeature(layer.feature.geometry.type);
-                        }
-
-                        return turf.booleanPointInPolygon(feature.geometry.coordinates,polygon);
-                    });
-                    
-                }
-
-                return feature.properties.in_polygon;
-                
+                feature.properties.in_polygon = false;
+                console.log(feature.properties.in_polygon);
             }
+
+            else feature.properties.in_polygon = true;
+        }
           
             
           return true;
