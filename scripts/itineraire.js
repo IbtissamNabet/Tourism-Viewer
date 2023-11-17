@@ -2,18 +2,21 @@ let boutonItineraire = document.getElementById("itineraire");
 
 let routingControl;
 
+let boutonOnItineraire = document.getElementById('onItineraire');
+let boutonOffItineraire = document.getElementById('offItineraire');
+/* On "vide" les boutons radio à l'ouverture de la page */
+boutonOnItineraire.checked = false;
+boutonOffItineraire.check = true;
+
 boutonItineraire.addEventListener('click', () => {
 
-  /* SI un itinéraire est déjà existant, on l'enlève pour en mettre un nouveau */
+  /* Enlève l'itinéraire si lorsqu'on rechoisi un itinéraire l'ancien est encore affiché
+  (si le bouton off n'est pas coché lors du nouveau choix) */
   if (routingControl != null) map.removeControl(routingControl);
 
   /* On initialise le nombre de clics sur la carte pour ne laisser 
   à l'utilisateur le choix que de choisir un déaprt et une arrivée */
   let nbclick = 0;
-
-  /* Contient latitude et longitude des points aux extrémités de l'itinéraire 
-  pour le côté backend qui renverra seulement les points autour de l'itinéraire */
-  let coordonneesItineraire = [];
 
   let el1, el2;
 
@@ -33,23 +36,24 @@ boutonItineraire.addEventListener('click', () => {
           L.latLng(el2)
         ]
       }).addTo(map);
-    /* Rajout pour la réception des popup dans la zone */
-    coordonneesItineraire = [el1.lat, el1.lng, el2.lat, el2.lng];
+      /* On initialise les boutons radio lors du premier choix d'itinéraire */
+      boutonOnItineraire.checked = true;
+      boutonOffItineraire.checked = false;
     }
   });
 })
 
-let boutonOnItineraire = document.getElementById('onItineraire');
-boutonOnItineraire.checked = false;
-let boutonOffItineraire = document.getElementById('offItineraire');
-boutonOffItineraire.check = true;
-
+/* Quand on coche on, l'itinéraire s'affiche */
 boutonOnItineraire.addEventListener('change', () => {
   boutonOffItineraire.checked = false;
+  routingControl.addTo(map);
 })
 
+/* Quand on coche off, l'itinéraire n'es plus visible mais n'est pas réinitialiser au cas où on veuille le re-afficher */
 boutonOffItineraire.addEventListener('change', () => {
   boutonOnItineraire.checked = false;
+  /* SI un itinéraire est déjà existant, on l'enlève de la carte */
+  if (routingControl != null) map.removeControl(routingControl);
 })
 
 
