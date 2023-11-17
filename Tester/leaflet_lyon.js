@@ -1,7 +1,10 @@
 var map = L.map('map').setView([45.75, 4.85], 13);
 
+//Il faut rajouter des fichiers TT...
+var GeoJSONCluster = require('leaftlet-geojson-cluster');
 //var marker = L.marker([45.75, 4.85]).addTo(map);
 
+var markers = L.markerClusterGroup();
 
 var poly = L.polygon([[
     [45.775965 + 0.01, 4.889241 + 0.01],
@@ -141,11 +144,6 @@ let geojsonFeature = {
 // Ajout un fichier geoJSON à la carte
 let layers = L.geoJSON(geojsonFeature).addTo(map);
 
-//var layerForDelete = L.geoJSON();
-//layerForDelete.addData(geojsonFeature);
-
-//baseMap = selectedTile pour la carte de base
-
 //let mapId = {};
 /*let geo = L.geoJSON(geojsonFeature,{
     onEachFeature: function(feature,layer)
@@ -155,10 +153,10 @@ let layers = L.geoJSON(geojsonFeature).addTo(map);
     }
 }).addTo(map);*/
 
-console.log(mapId);
+/*console.log(mapId);
 for (var key in mapId){
     console.log(key);
-}
+}*/
 
 /*
  * Classe gérant l'interface utilisateur de filtrage
@@ -225,32 +223,30 @@ filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked, inputItinChe
 
   map.removeLayer(layers);
 
-  let mapId = {};
-
   layers = L.geoJSON(geojsonFeature,
   {
     
-    onEachFeature: function(feature,layer)
+    /*onEachFeature: function(feature,layer)
     {
         mapId[feature.geometry.coordinates] = L.stamp(layer);
         console.log(L.stamp(layer));
-    },
+    },*/
 
       filter: function (feature) {
                 
           
           if(feature.properties.type == "AUTRE" && !inputOtherChecked ) {
-            for (var key in mapId)
+            /*for (var key in mapId)
             {
                 if (mapId[key] == feature.geometry.coordinates)
                 map.removeLayer(geo.getLayer(mapID[key]));
-            }
+            }*/
            return false;
           }
-          else if(feature.properties.type == "PUBLIC" && !inputPublicChecked && mapID[0] == feature.geometry.coordinates) {
+          else if(feature.properties.type == "PUBLIC" && !inputPublicChecked ) {
            return false;
           }
-          else if(feature.properties.type == "COMMERCE" && !inputBusinessChecked && mapID[0] == feature.geometry.coordinates) {
+          else if(feature.properties.type == "COMMERCE" && !inputBusinessChecked ) {
            return false;
           }
 
