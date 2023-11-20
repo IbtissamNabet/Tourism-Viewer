@@ -232,3 +232,27 @@ reset.addEventListener('click', () => {
     /* On vide (évidemment) le tableau qui contient les types cochés lorsque l'on à décoché toutes les cases */
     sousTypesSelectionnes = [];
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+https://developers.google.com/maps/documentation/javascript/examples/marker-remove
+https://stackoverflow.com/questions/9912145/leaflet-how-to-find-existing-markers-and-delete-markers
+*/

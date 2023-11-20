@@ -8,6 +8,10 @@ body {
     color: var(--color-primary);
 }
 
+fieldset {
+    border: solid;
+}
+
 /* Pour les popup et leur infos */
 h3 {
     color: var(--color-tertiary);
