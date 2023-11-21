@@ -8,9 +8,21 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+/*
+let markers = [];
+for(let i = 0; i < 4; i++){
+    let marker = new L.marker([45.767422, 4.893609], {title : i}).addTo(map);
+    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 
-// 
-let marker = L.marker([45.767422, 4.893609]).addTo(map);
+    markers.push(marker);
+}
+for(let i =0 ; i < markers.length; i++){
+    console.log(markers[i].options.title);
+}
+*/
+
+let marker = new L.marker([45.767422, 4.893609]).addTo(map);
+map.addLayer(marker);
 // bindPopup: lie un pop-up à un objet déclaré dans une variable
 // openPopup: affiche le pop-up à l'ouverture
 marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
@@ -18,6 +30,7 @@ marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 let popup = L.popup();
 // affiche dans un pop-up les "Nothing Here" s'il n'y a pas de message
 function onMapClick(e) {
+    map.removeLayer(marker);
     popup
         .setLatLng(e.latlng)
         .setContent("Nothing Here")

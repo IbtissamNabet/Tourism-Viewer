@@ -133,32 +133,6 @@ for (let j = 0; j < typesLieux.length; j++){
 
 
 
-/* Tableau qui contiendra tous les types qui sont actuellement cochés (checkbox.checked = true)
-(c'est le tableau récupéré par python pour renvoyer les infos des lieux à afficher) */
-let sousTypesSelectionnes = [];
-
-for (let c = 0; c < sousTypesLieux.length ; c++){
-    let nomCheckBox = sousTypesLieux[c];
-    /* Pour chaque catégories du tableau on prend son équivalent en tant qu'identifiant */
-    let idCheckBox = sousTypesLieux[c].replaceAll(/\s|`|"|‘|'|,|\(.*?\)/g,'-');
-
-    let check = document.querySelector("input[type = checkbox][id = " + idCheckBox + "]");
-    check.addEventListener('change', () => {
-        if(check.checked){
-            /* Cases cochée > on l'ajoute dans le tableau dédié */
-            sousTypesSelectionnes.push(nomCheckBox);
-        }
-        else{
-            /* Lorsque que l'on décoche une case on l'enlève du tableau qui répertorie les cases cochées */
-            sousTypesSelectionnes = sousTypesSelectionnes.filter((lieuxspe)=> lieuxspe !== nomCheckBox);
-        }
-    })
-}
-
-
-
-
-
 
 /* On récupère les données qui correspondent à tous les lieux qui ont leur type coché */
 const repInfos = await fetch('json/data_idf.json'); // à changer !
@@ -213,6 +187,28 @@ for(let t = 0; t < infos.length; t++){
 }
 
 
+
+/* Tableau qui contiendra tous les types qui sont actuellement cochés (checkbox.checked = true)
+(c'est le tableau récupéré par python pour renvoyer les infos des lieux à afficher) */
+let sousTypesSelectionnes = [];
+
+for (let c = 0; c < sousTypesLieux.length ; c++){
+    let nomCheckBox = sousTypesLieux[c];
+    /* Pour chaque catégories du tableau on prend son équivalent en tant qu'identifiant */
+    let idCheckBox = sousTypesLieux[c].replaceAll(/\s|`|"|‘|'|,|\(.*?\)/g,'-');
+
+    let check = document.querySelector("input[type = checkbox][id = " + idCheckBox + "]");
+    check.addEventListener('change', () => {
+        if(check.checked){
+            /* Cases cochée > on l'ajoute dans le tableau dédié */
+            sousTypesSelectionnes.push(nomCheckBox);
+        }
+        else{
+            /* Lorsque que l'on décoche une case on l'enlève du tableau qui répertorie les cases cochées */
+            sousTypesSelectionnes = sousTypesSelectionnes.filter((lieuxspe)=> lieuxspe !== nomCheckBox);
+        }
+    })
+}
 
 
 
