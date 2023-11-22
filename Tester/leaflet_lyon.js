@@ -1,10 +1,5 @@
 var map = L.map('map').setView([45.75, 4.85], 13);
-
-//Il faut rajouter des fichiers TT...
-var GeoJSONCluster = require('leaftlet-geojson-cluster');
 //var marker = L.marker([45.75, 4.85]).addTo(map);
-
-var markers = L.markerClusterGroup();
 
 var poly = L.polygon([[
     [45.775965 + 0.01, 4.889241 + 0.01],
@@ -141,9 +136,18 @@ let geojsonFeature = {
 
 // Initialisation de la carte
 
-// Ajout un fichier geoJSON à la carte
-let layers = L.geoJSON(geojsonFeature).addTo(map);
+//Pour les clusters
+var markers = L.markerClusterGroup();
 
+// Ajout un fichier geoJSON à la carte
+//let layers = L.geoJSON(geojsonFeature).addTo(map);
+let layers = L.geoJSON(geojsonFeature);
+
+//cluster markers
+markers.addLayer(layers);
+map.addLayer(markers);
+
+//var locations = L.geoJSON(geojsonFeature);
 //let mapId = {};
 /*let geo = L.geoJSON(geojsonFeature,{
     onEachFeature: function(feature,layer)
@@ -168,9 +172,11 @@ let MyControlClass =  L.Control.extend({
   },
   
 
-onAdd: function(map) {
+onAdd: function(map,markers) {
 
   this.map = map;
+
+  this.markers = markers;
 
   let div = L.DomUtil.create('div', 'leaflet-bar my-control');
 
@@ -221,7 +227,9 @@ onAdd: function(map) {
 
 filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked, inputItinChecked){
 
-  map.removeLayer(layers);
+  markers.removeLayer(layers);
+  map.removeLayer(markers);
+ 
 
   layers = L.geoJSON(geojsonFeature,
   {
@@ -272,10 +280,12 @@ filter(inputOtherChecked, inputPublicChecked, inputBusinessChecked, inputItinChe
           return true;
 
       }
-  }).addTo(map);
+  })
+  markers.addLayer(layers);
+  map.addLayer(markers);
 },
 
-onRemove: function(map)
+onRemove: function(map,markers)
 {
 }
 });
