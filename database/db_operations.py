@@ -1,3 +1,4 @@
+import mysql.connector
 ################# FONCTIONS DE VERIFICATION AVANT INSERTION################
 
 # fonction qui de vérification avant insertion dans Types
@@ -77,8 +78,45 @@ def insert_appartenir(id,nom_type,connexion):
     
 def get_id_poi(nom_poi,latitude,longitude,connexion):
     curseur=connexion.cursor()
-    query = "SELECT id_poi FROM POI WHERE nom_poi = %s AND latitude = %s AND longitude = %s"
+    query = "SELECT id_poi FROM POI INNER JOIN (appartenir) WHERE nom_poi = %s AND latitude = %s AND longitude = %s"
     curseur.execute(query,(nom_poi,latitude,longitude))
     result=curseur.fetchone()
     curseur.close()
     return result[0] 
+
+################# FONCTIONS DE RECUPERATION DE DONNEES DE LA BASE DE DONNEES ################
+
+# Fonction qui execute une requete et retourne le résultat sous forme de dictionnaire
+def execute_query_and_return_dict(query, values, connexion):
+    result_dict = {}    
+    try:
+        # Connexion à la base de données
+        while not connexion.is_connected():
+            connexion.reconnect()
+        # Création d'un curseur
+        cursor = connexion.cursor(dictionary=True)
+        # Exécution de la requête
+        cursor.execute(query,values)
+        # Récupération des résultats sous forme de dictionnaire
+        result_dict = cursor.fetchall()
+    except mysql.connector.Error as err:
+        print(f"Erreur MySQL: {err}")
+    finally:
+        # Fermeture du curseur
+        if cursor:
+            cursor.close()
+    return result_dict
+
+# Fonction qui retourne les POI d'un certain types
+def getData_accTypes(liste_types,connexion):
+    # le résultat est une liste de dictionnaire
+    final=[]
+    #query="SELECT * FROM poi INNER JOIN (SELECT * FROM appartenir WHERE nom_type = %s) ON poi.id_poi = appartenir.id_poi"    
+    query="SELECT * FROM POI INNER JOIN appartenir ON POI.id_poi = appartenir.id_poi WHERE nom_type = %s"
+    for type in liste_types:
+        print(type)        
+        value=(type,)
+        result=execute_query_and_return_dict(query,value,connexion)
+        final=final+result 
+    # Renvoyer les données au format JSON
+    return final

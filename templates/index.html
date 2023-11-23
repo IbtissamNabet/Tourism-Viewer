@@ -5,11 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         
         <title>Tourism Viewer</title>
-        <link rel="icon" href="images/logo.png">
+        <link rel="icon" href="static/images/logo.png">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
-        <link rel="stylesheet" href="styles/style.css">
+
+        <link rel="stylesheet" href="static/styles/style.css">
+        <link rel="icon" href="static/favicon.ico">
 
         <!-- Import de Leaflet -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -21,13 +23,22 @@
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
         crossorigin=""></script>
 
+        <!-- Nécessaire pour l'itinéraire -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
         <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+        <script type="module" src="static/scripts/itineraire.js"></script>
+        <script type="module" src="static/scripts/autocompletion.js"></script>
 
-        <script type="text/javascript" src="scripts/map.js" defer></script>
-        <script type="module" src="scripts/filtres.js"></script>
-        <script type="module" src="scripts/popup.js"></script>
-        <script type="module" src="scripts/itineraire.js"></script>
+        <script type="text/javascript" src="static/scripts/map.js" defer></script>
+        <script type="module" src="static/scripts/connexion.js"></script>
+        <script type="module" src="static/scripts/filtres.js"></script>
+        <script type="module" src="static/scripts/popup.js"></script>
+
+        <!-- Inclure jQuery -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <!-- Inclure jQuery UI -->
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     </head>
 
@@ -35,7 +46,7 @@
         <header>
             <nav>
                 <a href="index.html" class="logo-lien">
-                    <img id="logo" src="images/logo.png" alt="Logo Tourism Viewer">
+                    <img id="logo" src="static/images/logo.png" alt="Logo Tourism Viewer">
                 </a>
                 <a href="index.html">Map</a>
                 <a href="#infos">Infos</a>
@@ -48,11 +59,20 @@
             <section class="recherches-touristiques">
                 <section class="filtres-map">
                     <fieldset>
+                        <!-- message envoyé par le backend au frontend -->
+                        <div id="message-container"></div>
                         <legend><h1>Itinéraire</h1></legend>
                         <div class="itineraire">
                             <button id="itineraire">Choisir un itinéraire</button>
-                            <h4>Départ</h4>
-                            <h4>Arrivée</h4>
+                            
+                            <label for="depart">Départ</label>
+                            <input type="text" name="itineraire" id="depart" placeholder="Choose on the map">
+                            <select class="form-control" name="=villeDepart" id="villeDepart"></select>
+
+                            <label for="arrivee">Arrivée</label>
+                            <input type="text" name="itineraire" id="arrivee" placeholder="Choose on the map">
+                            <div style="display: none;";color:#f55;id="messageDerreur"></div>
+                            <select class="form-control" name="=villeArrivee" id="villeArrivee"></select>
                             
                             <div>
                                 <input type="radio" id="onItineraire">
@@ -80,8 +100,7 @@
                 <h1>Les plus beaux sites de *pays*</h1>
 
             </section>
-            <div> <script src="connexion.js"></script></div>
-            
+                        
         </main>
 
         <footer>

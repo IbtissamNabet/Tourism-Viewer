@@ -15,8 +15,8 @@ data_migration.import_type(f'..//data//csv_files//cleaned_csv//types.csv',connex
 
 #récupération des fichiers de poi du dossiers csv_files/cleaned_csv dans une liste de string 
 #une liste de fichiers propres a POI ( les fichiers qui se terminent par ...)
-#pcq y'a beaucoup de regions donc on a besoin dune liste de fichier propre a chaque region 
-dir = "../data/csv_files/cleaned_csv/"
+#pcq y'a beaucoup de regions donc on a besoin dune liste de *$=fichier propre a chaque region 
+dir = "..//data//csv_files//cleaned_csv//"
 files = os.listdir(dir)
 poi_files = [file for file in files if file.endswith("20231014.csv")]
 
