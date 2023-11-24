@@ -142,14 +142,16 @@ let newTypes = [];
 /* Tableau qui stocke les types décochés dont il faut enlever les marqueurs encore présents */
 let oldTypes = [];
 
-
-
+/* On créé un groupe de layers pour pouvoir gérer les marqueurs dasn la fonction update */
+let layerGroup = L.layerGroup().addTo(map);
 
 async function updateMarkers() {
     /* On récupère les données qui correspondent à tous les lieux qui ont leur type coché */
     const repInfos = await fetch('/static/json/data_got.json');
     const infos = await repInfos.json();
 
+    /* On efface tous les markers de la carte pour ne recréer que ceux encore cochés */
+    layerGroup.clearLayers();
 
 
     /* Pour tout les lieux on affiche un popup */
@@ -159,84 +161,52 @@ async function updateMarkers() {
         décoché, ou aucun des deux (dans quel cas on n'y touche pas) */
         let nomType = infos[t].nom_type;
 
+        /* Affichage du pointeur sur la carte */
+        let marker = new L.marker([infos[t].latitude,infos[t].longitude]);
+        marker.addTo(layerGroup);
 
-
-        if(newTypes.includes(nomType)){
-            /* Affichage du pointeur sur la carte */
-            let marker = new L.marker([infos[t].latitude,infos[t].longitude], {title : nomType}).addTo(map);
-            map.addLayer(marker);
-            console.log("lattitude est : " ,infos[t].latitude ,"longitude est :" , infos[t].longitude );
-
-            let nomLieu = infos[t].nom_poi;
+        let nomLieu = infos[t].nom_poi;
 
 
 
-            /* On récupère chaque élément de l'adresse complète */
-            let adressePostale = infos[t].adresse_postale;
-            let codePostal = infos[t].code_postal;
-            let commune = infos[t].commune;
+        /* On récupère chaque élément de l'adresse complète */
+        let adressePostale = infos[t].adresse_postale;
+        let codePostal = infos[t].code_postal;
+        let commune = infos[t].commune;
 
-            /* On ne construit l'adresse qu'en fonction des éléments présent dans la base de données */
-            let adresse = "";
-            if(!adressePostale){adresse += codePostal + " " + commune;}
-            else{adresse = adressePostale + "<br>" + codePostal + " " + commune;}
-
-
-
-            /* On récupère chaque moyen de contact */
-            let numTel = infos[t].tel;
-            let email = infos[t].adresse_mail;
-            let siteWeb = infos[t].site_web;
-
-            /* Idem que pour l'adresse */
-            let contact = "";
-            if(numTel) contact += numTel + "<br>";
-            if(email) contact += email + "<br>";
-            if(siteWeb) contact += "<a>" + siteWeb + "</a>";
+        /* On ne construit l'adresse qu'en fonction des éléments présent dans la base de données */
+        let adresse = "";
+        if(!adressePostale){adresse += codePostal + " " + commune;}
+        else{adresse = adressePostale + "<br>" + codePostal + " " + commune;}
 
 
 
-            let description = infos[t].description;
+        /* On récupère chaque moyen de contact */
+        let numTel = infos[t].tel;
+        let email = infos[t].adresse_mail;
+        let siteWeb = infos[t].site_web;
+
+        /* Idem que pour l'adresse */
+        let contact = "";
+        if(numTel) contact += numTel + "<br>";
+        if(email) contact += email + "<br>";
+        if(siteWeb) contact += "<a>" + siteWeb + "</a>";
 
 
 
-            /* Tests finaux > des fois rien du tout n'est renseigné (surtout dans contacts et description) */
-            let infosPopup = "<h2>" + nomLieu + "</h2>";
-            if(contact) infosPopup += "<h3>contacts</h3>" + contact;
-            if(adresse) infosPopup += "<h3>adresse</h3>" + adresse;
-            if(description) infosPopup += "<h3>description</h3>" + description;
-            if(nomType) infosPopup += "<h3>nom du type </h3>" + nomType;
-
-            /* Affichage popup avec infos */
-            marker.bindPopup(infosPopup).openPopup();
-            
+        let description = infos[t].description;
 
 
-            /* On ajoute le marqueur parmis ceux affichés */
-            markers.push(marker);
 
-console.log(newTypes);
-            /* On supprime le type de la liste des markers à créer */
-            newTypes = newTypes.filter((lefts)=> lefts !== nomType);
-            console.log(newTypes);
-        }
-    }
-}
+        /* Tests finaux > des fois rien du tout n'est renseigné (surtout dans contacts et description) */
+        let infosPopup = "<h2>" + nomLieu + "</h2>";
+        if(contact) infosPopup += "<h3>contacts</h3>" + contact;
+        if(adresse) infosPopup += "<h3>adresse</h3>" + adresse;
+        if(description) infosPopup += "<h3>description</h3>" + description;
+        if(nomType) infosPopup += "<h3>nom du type </h3>" + nomType;
 
-function removeMarkers(oldTypes){
-    /* Si le type est signalé comme ayant été affiché et maintenant décoché ... */
-    for(let i = 0; i < oldTypes.length; i++){
-        for(let m = 0; m < markers.length; m++){
-            /* ... on cherche tous les markers auquels il avait donné lieu */
-            if(markers[m].options.title === oldTypes[i]) map.removeLayer(markers[m]);
-
-            /* Le marqueur ne fait plus parti des marqueurs affichés */
-            markers = markers.filter((lefts)=> lefts !== markers[m]);
-        }
-console.log(oldTypes);
-        /* On supprime le type de la liste des markers à enlever */
-        oldTypes = oldTypes.filter((lefts)=> lefts !== oldTypes[i]);
-console.log(oldTypes);
+        /* Affichage popup avec infos */
+        marker.bindPopup(infosPopup).openPopup();
     }
 }
 
@@ -258,21 +228,13 @@ for (let c = 0; c < sousTypesLieux.length ; c++){
 
         if(check.checked){
             /* Cases cochée > on l'ajoute dans le tableau dédié */
-            sousTypesSelectionnes.push(nomCheckBox);
-            /* Pour ne pas créer de doublons dans l'update on rempli le tableau qui ne contiendra que les markers de types cochés et encore non affichés */
-            newTypes.push(nomCheckBox);
-            
+            sousTypesSelectionnes.push(nomCheckBox);            
             connexion_functions.data_selections(sousTypesSelectionnes,updateMarkers);
         }
         else{
-            /* On rajoute le type comme " à être supprimé de l'affichage de la carte " */
-            oldTypes.push(nomCheckBox);
-            /* On met à jour les markers avant de supprimer le type de la liste des types sélectionnés
-            puisque l'update se fait en parcourant le json des types sélectionnés */
-            removeMarkers(oldTypes);
-            /* Lorsque que l'on décoche une case on l'enlève du tableau qui répertorie les cases cochées */
+            /* On supprime le marqueur décoché des types selectionnés pour ne plus les afficher */
             sousTypesSelectionnes = sousTypesSelectionnes.filter((lieuxspe)=> lieuxspe !== nomCheckBox);
-            
+            connexion_functions.data_selections(sousTypesSelectionnes,updateMarkers);
         }
     })
 }
@@ -282,7 +244,7 @@ for (let c = 0; c < sousTypesLieux.length ; c++){
 
 
 /* On récupère le bouton de réinitialisation */
-    let reset = document.getElementById("reset");
+let reset = document.getElementById("reset");
 
 
 /* On vide le tableau des marqueurs */
@@ -295,12 +257,7 @@ reset.addEventListener('click', () => {
         checks.checked = false;
     }
 
-    /* On met tous les types jusqu'à présent sélectionnés dans la "corbeille" ... */
-    oldTypes = sousTypesSelectionnes;
-    /* Et on update l'affichage des marqueurs */
-    removeMarkers(oldTypes);
-    /* Et on vide (évidemment) le tableau qui contient les types cochés lorsque l'on à décoché toutes les cases 
-    > à la fin car sinon pas possible de savoir quels marqueurs supprimer */
+    /* Et on vide (évidemment) le tableau qui contient les types cochés lorsque l'on à décoché toutes les cases */
     sousTypesSelectionnes = [];
-
+    connexion_functions.data_selections(sousTypesSelectionnes,updateMarkers);
 })
