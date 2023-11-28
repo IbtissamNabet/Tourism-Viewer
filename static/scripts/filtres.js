@@ -143,23 +143,15 @@ let newTypes = [];
 let oldTypes = [];
 
 /* On créé un groupe de layers pour pouvoir gérer les marqueurs dasn la fonction update */
-let layerGroup = L.layerGroup();
-
-let marqueurs = L.markerClusterGroup();
-marqueurs.addLayer(layerGroup);
-map.addLayer(marqueurs);
+let layerGroup = L.layerGroup().addTo(map);
 
 async function updateMarkers() {
     /* On récupère les données qui correspondent à tous les lieux qui ont leur type coché */
     const repInfos = await fetch('/static/json/data_got.json');
     const infos = await repInfos.json();
 
-
     /* On efface tous les markers de la carte pour ne recréer que ceux encore cochés */
     layerGroup.clearLayers();
-
-    marqueurs.removeLayer(layerGroup);
-    map.removeLayer(marqueurs);
 
 
     /* Pour tout les lieux on affiche un popup */
@@ -216,9 +208,6 @@ async function updateMarkers() {
         /* Affichage popup avec infos */
         marker.bindPopup(infosPopup).openPopup();
     }
-
-    marqueurs.addLayer(layerGroup);
-    map.addLayer(marqueurs);
 }
 
 
