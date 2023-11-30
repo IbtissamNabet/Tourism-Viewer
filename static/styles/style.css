@@ -1,0 +1,146 @@
+body {
+    --color-primary: white;
+    --color-secondary: #252020;
+    --color-tertiary: #fca871; /*#b5cfff*/
+    --color-quatre: #726d6d5d;
+    margin: 0;
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+}
+
+fieldset {
+    border: solid;
+}
+
+/* Pour les popup et leur infos */
+h3 {
+    color: var(--color-tertiary);
+    margin-bottom: 5px;
+    font-size: 17px;
+}
+
+#logo {
+    width:2em;
+    height: 2em;
+}
+
+.recherches-touristiques {
+    display: flex;
+    flex-direction: row;
+    height: 55em;
+}
+
+.recherches-touristiques h1{
+    color: black;
+}
+
+.filtres-map {
+    width: 20%;
+    background-color: var(--color-tertiary)  ;
+    border-radius: 0px 35px 0px 35px;
+    padding: 20px;
+}
+
+.itineraire, .selection-type-lieux {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.selection-type-lieux {
+    height: 85%;
+    overflow-y: auto;
+    padding: 2%;
+    border-bottom: solid;
+    border-top: solid;
+    border-color: black;
+}
+
+.filtres-fieldset {
+    height: 64%;
+    padding-bottom: 2%;
+}
+
+#reset {
+    float: right;
+}
+
+.createclass {
+    background-color: var(--color-quatre);
+    display: none; /* NE PAS CHANGER (cf fichier filtres.js)*/
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-right: 0.7em;
+    padding-left: 0.5em;
+    font-size: 15px;
+}
+
+.divcheckbox {
+    margin: 0.2em;
+    border-style: solid;
+    width: 100%;
+}
+
+#map {
+    width: 80%;
+    z-index: 0;
+    border-radius: 35px 0px 35px 0px;
+    color: black; /* Pour l'affichage des noms de l'itinéraire */
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+
+}
+
+a:active, a:hover {
+    color: gray;
+}
+
+#infos {
+    padding: 20px;
+}
+
+header, footer {
+    padding : 20px 50px;
+    color: var(--color-primary);
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--color-secondary);
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 40em;
+    padding-left: 40em;
+    background-color: var(--color-tertiary);
+    border-radius: 20px;
+}
+
+label {
+    color: var(--color-primary);
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 20em;
+    align-items: center;
+    background-color: var(--color-tertiary);
+}
+
+.itineraire-adresses{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
