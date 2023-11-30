@@ -23,6 +23,9 @@ cursor.execute(query)
 
 query="ALTER TABLE POI MODIFY COLUMN description TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 cursor.execute(query)
+
+query="ALTER TABLE POI MODIFY COLUMN adresse_postale TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+cursor.execute(query)
 query="ALTER TABLE POI MODIFY COLUMN nom_poi TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 cursor.execute(query)
 

@@ -1,4 +1,3 @@
-import mysql.connector
 ################# FONCTIONS DE VERIFICATION AVANT INSERTION################
 
 # fonction qui de vérification avant insertion dans Types
@@ -42,8 +41,9 @@ def insert_type(type_,type_parent,connexion):
     #vérifier l'insertion
     query = "SELECT * FROM Types WHERE nom_type = %s AND nom_type_1 = %s"
     curseur.execute(query,(type_,type_parent))
-    result=curseur.fetchone()
-    print(result[0])
+    result = curseur.fetchone()
+    if result is not None and len(result) > 0:
+        print(result[0])
     # Valider la transaction si tout s'est bien passé
     connexion.commit()
     curseur.close()
@@ -56,8 +56,9 @@ def insert_poi(nom_poi,latitude,longitude,adresse,mail,code,commune,site,tel,des
     #vérifier l'insertion
     query = "SELECT * FROM POI WHERE nom_poi = %s AND latitude = %s AND longitude = %s"
     curseur.execute(query,(nom_poi,latitude,longitude))
-    result=curseur.fetchone()
-    print(result[1])
+    result = curseur.fetchone()
+    if result is not None and len(result) > 1:
+        print(result[1])
     # Valider la transaction si tout s'est bien passé
     connexion.commit()
     curseur.close()
@@ -70,19 +71,22 @@ def insert_appartenir(id,nom_type,connexion):
     #vérifier l'insertion
     query = "SELECT * FROM appartenir WHERE id_poi = %s AND nom_type = %s"
     curseur.execute(query,(id,nom_type))
-    result=curseur.fetchone()
-    print(result[0])
+    result = curseur.fetchone()
+    result = curseur.fetchone()
+    if result is not None and len(result) > 0:
+        print(result[0])
     # Valider la transaction si tout s'est bien passé
     connexion.commit()
     curseur.close()
     
 def get_id_poi(nom_poi,latitude,longitude,connexion):
     curseur=connexion.cursor()
-    query = "SELECT id_poi FROM POI INNER JOIN (appartenir) WHERE nom_poi = %s AND latitude = %s AND longitude = %s"
+    query = "SELECT id_poi FROM POI WHERE nom_poi = %s AND latitude = %s AND longitude = %s"
     curseur.execute(query,(nom_poi,latitude,longitude))
     result=curseur.fetchone()
     curseur.close()
     return result[0] 
+
 
 ################# FONCTIONS DE RECUPERATION DE DONNEES DE LA BASE DE DONNEES ################
 
