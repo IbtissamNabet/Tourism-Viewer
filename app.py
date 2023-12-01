@@ -2,6 +2,7 @@ from flask import Flask, jsonify, render_template, url_for, send_from_directory,
 from mysql.connector import Error
 import mysql.connector
 import json 
+import geojson
 
 import database.db_operations
 
@@ -22,6 +23,8 @@ connexion=mysql.connector.connect(
 
 # Chemin du fichier JSON à mettre à jour
 json_file_path = 'static/json/data_got.json'
+geojson_file_path = 'static/json/data_got.geojson'
+
 # La fonction propre a cette url (l'index)
 @app.route("/")
 def index():
@@ -45,6 +48,8 @@ def traiter_nombre_selection():
         # Retourner le nombre de type selectionner avec un message
         with open(json_file_path, 'w') as json_file:
             json.dump(msg, json_file, indent=2)
+        with open(geojson_file_path, 'w') as gjson_file:
+            geojson.dump(msg, gjson_file, indent=2)
         
         return jsonify({"message": msg}), 200
 
@@ -67,6 +72,8 @@ def traiter_data():
         print(f'la liste est : {dict_data}') #affiche les données à retourner dans le terminal 
         with open(json_file_path, 'w') as json_file:
             json.dump(dict_data, json_file, indent=2)
+        with open(geojson_file_path, 'w') as gjson_file:
+            geojson.dump(dict_data, gjson_file, indent=2)
              # Ajout : Supprimer les informations d'un type du fichier data_got.json
         # Retourner le nombre de type selectionner avec un message
         return jsonify({"data":dict_data}), 200
