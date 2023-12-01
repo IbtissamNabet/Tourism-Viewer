@@ -140,7 +140,7 @@ function Autocompleter(input, select, indiceDansSelectCoord) {
     },
     minLength: 3, // Nombre minimum de caractères pour déclencher l'autocomplétion
     select: function (event, sugg) {
-      // select pour Mettre à jour la liste déroulante avec la ville sélectionnée lorsque l'utilisateur valide une adresse 
+      // select pour Mettre à jour la liste déroulante avec la ville sélectionnée lorsque l'utilisateur valide une adresse
       select.value = sugg.item.label;
       //les coordonées selectionées 
       const coor= sugg.item.coordinates;

@@ -41,6 +41,17 @@ h3 {
     padding: 20px;
 }
 
+select {
+    display : none;
+    appearance: none;
+    outline: 0;
+    border: 0 !important;
+    background: #F9F9F9;
+    background-image: none;
+    box-shadow: none;
+    font-size: 1.2em;
+  }
+
 .itineraire, .selection-type-lieux {
     display: flex;
     flex-direction: column;
