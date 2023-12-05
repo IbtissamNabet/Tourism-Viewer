@@ -44,12 +44,8 @@
     <body>
         <header>
             <nav>
-                <a href="index.html" class="logo-lien">
-                    <img id="logo" src="static/images/logo.png" alt="Logo Tourism Viewer">
-                </a>
-                <a href="index.html">Map</a>
-                <a href="#infos">Infos</a>
-                <a href="#creators">Creators</a>
+                <img id="logo" src="static/images/logo.png" alt="Logo Tourism Viewer">
+                <p>Tourism Viewer</p>
             </nav>
         </header>
 
@@ -57,7 +53,7 @@
 
             <section class="recherches-touristiques">
                 <section class="filtres-map">
-                    <fieldset>
+                    <fieldset class="itineraire-fieldset">
                         <!-- message envoyé par le backend au frontend -->
                         <div id="message-container"></div>
                         <legend><h1>Itinéraire</h1></legend>
@@ -65,7 +61,6 @@
                             <button id="itineraire">Choisir sur la carte</button>
 
                             <p>ou</p>
-
 
                             <label for="depart">Départ</label>
                             <input type="text" name="itineraire" id="depart" placeholder="Choisir un lieu départ">
@@ -75,10 +70,10 @@
                             <input type="text" name="itineraire" id="arrivee" placeholder="Choisir un lieu d'arrivée">
                             <select class="form-control" name="=villeArrivee" id="villeArrivee"></select>
 
-                            <button id="autocomp" value="chercher l'itinéraire">chercher l'itinéraire</button>
+                            <button id="autocomp" value="chercher l'itinéraire">Chercher l'itinéraire</button>
 
 
-                            <div>
+                            <div class="boutons-radios">
                                 <input type="radio" id="onItineraire">
                                 <label for="onItineraire">On</label>
                                 <input type="radio" id="offItineraire">
@@ -97,18 +92,11 @@
             
                 <div id="map"></div>
             </section>
-
-            <section id="infos">
-                <h1>Les plus beaux sites de *ville*</h1>
-
-                <h1>Les plus beaux sites de *pays*</h1>
-
-            </section>
                         
         </main>
 
         <footer>
-            <div id="creators">
+            <div>
                 <ul>
                     <li><a href="https://forge.univ-lyon1.fr/p2102840" target="_blank">Hanitrinirina Sarobidy</a></li>
                     <li><a href="https://forge.univ-lyon1.fr/p2208660" target="_blank">Nabet Ibtissam</a></li>
@@ -117,7 +105,7 @@
                 </ul>
             </div>
             <p>autonome 2023</p>
-            <div class="cadre-projet">
+            <div>
                 <p>Projet de 3ème année</p>
                 <a href="https://www.univ-lyon1.fr/" target="_blank">Université Claude Bernard Lyon 1</p>
             </div>

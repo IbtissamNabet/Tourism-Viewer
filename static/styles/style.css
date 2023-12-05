@@ -47,8 +47,6 @@ select {
     outline: 0;
     border: 0 !important;
     background: #F9F9F9;
-    background-image: none;
-    box-shadow: none;
     font-size: 1.2em;
   }
 
@@ -56,20 +54,30 @@ select {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    padding: 2%;
+}
+
+.itineraire p {
+    margin: auto;
+    margin-top: 3%;
+    margin-bottom: 3%;
 }
 
 .selection-type-lieux {
     height: 85%;
     overflow-y: auto;
-    padding: 2%;
     border-bottom: solid;
     border-top: solid;
     border-color: black;
 }
 
 .filtres-fieldset {
-    height: 64%;
+    height: 62%;
     padding-bottom: 2%;
+}
+
+.itineraire-fieldset {
+    height: 30%;
 }
 
 #reset {
@@ -130,11 +138,15 @@ nav {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding-right: 40em;
     padding-left: 40em;
     background-color: var(--color-tertiary);
     border-radius: 20px;
+}
+
+nav p{
+    font-size: 1,5em;
 }
 
 label {
@@ -147,7 +159,7 @@ footer {
     justify-content: space-between;
     padding-left: 20em;
     align-items: center;
-    background-color: var(--color-tertiary);
+    background-color: var(--color-secondary);
 }
 
 .itineraire-adresses{
