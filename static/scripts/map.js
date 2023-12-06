@@ -10,23 +10,6 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-
-// 
-
-// bindPopup: lie un pop-up à un objet déclaré dans une variable
-// openPopup: affiche le pop-up à l'ouverture
-
-
-let popup = L.popup();
-// affiche dans un pop-up les "Nothing Here" s'il n'y a pas de message
-function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("Nothing Here")
-        .openOn(map);
-}
-map.on('click', onMapClick);
-
 let logoIcon = new L.Icon({
     iconUrl: 'static/images/logo.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -47,7 +30,7 @@ let options = {
 pour mettre à jour la position du marqueur et déplacer la carte pour montrer la nouvelle position.*/
 function position(pos) {
     var crd = pos.coords;
-    console.log(" position actuelle  de l'utilisateur est :");
+    console.log("La position actuelle  de l'utilisateur est :");
     console.log(`Latitude : ${crd.latitude}`);
     console.log(`Longitude : ${crd.longitude}`);
     console.log(`La précision est de ${crd.accuracy} mètres.`);
