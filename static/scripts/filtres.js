@@ -9,6 +9,7 @@
 
 /* On récupère le fichier json contenant les types de lieux sous forme de tableau */
 import connexion_functions from './connexion.js'
+import {myPositionCoord} from './position.js'; 
 const rep = await fetch('/static/json/types.json');
 const lieux = await rep.json();
 
@@ -221,30 +222,98 @@ async function updateMarkers() {
 
 
 
+
+
+
 /* Tableau qui contiendra tous les types qui sont actuellement cochés (checkbox.checked = true)
+
 (c'est le tableau récupéré par python pour renvoyer les infos des lieux à afficher) */
+
 let sousTypesSelectionnes = [];
 
+let arround = document.getElementById('onArround');
+
+
+
 for (let c = 0; c < sousTypesLieux.length ; c++){
+
     let nomCheckBox = sousTypesLieux[c];
+
     /* Pour chaque catégories du tableau on prend son équivalent en tant qu'identifiant */
+
     let idCheckBox = sousTypesLieux[c].replaceAll(/\s|`|"|‘|'|,|\(.*?\)/g,'-');
 
+
+
     let check = document.querySelector("input[type = checkbox][id = " + idCheckBox + "]");
+
     check.addEventListener('change', () => {
 
+
+
         if(check.checked){
+
             /* Cases cochée > on l'ajoute dans le tableau dédié */
-            sousTypesSelectionnes.push(nomCheckBox);            
-            connexion_functions.data_selections(sousTypesSelectionnes,updateMarkers);
+
+            sousTypesSelectionnes.push(nomCheckBox);  
+
+            // Vérifiez s'il est coché
+
+            if (arround.checked) {
+
+                console.log("arround est en mode on, affichage autour de moi!");
+
+                let lat=myPositionCoord.latitude;
+
+                let long=myPositionCoord.longitude;
+
+                let radius=200;
+
+                connexion_functions.getPoiAutour(sousTypesSelectionnes,lat,long,radius,updateMarkers);
+
+            } else {
+
+                console.log("arround est en mode off,affichage sur toute la France");
+
+                connexion_functions.data_selections(sousTypesSelectionnes,updateMarkers);
+
+            }                      
+
         }
+
         else{
+
             /* On supprime le marqueur décoché des types selectionnés pour ne plus les afficher */
+
             sousTypesSelectionnes = sousTypesSelectionnes.filter((lieuxspe)=> lieuxspe !== nomCheckBox);
-            connexion_functions.data_selections(sousTypesSelectionnes,updateMarkers);
+
+            if (arround.checked) {
+
+                console.log("arround est en mode on, affichage autour de moi!");
+
+                let lat=myPositionCoord.latitude;
+
+                let long=myPositionCoord.longitude;
+
+                let radius=200;
+
+                connexion_functions.getPoiAutour(sousTypesSelectionnes,lat,long,radius,updateMarkers);
+
+            } else {
+
+                connexion_functions.data_selections(sousTypesSelectionnes,updateMarkers);
+
+            }             
+
         }
+
     })
+
 }
+
+
+
+
 
 
 

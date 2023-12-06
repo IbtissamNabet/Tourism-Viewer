@@ -167,8 +167,25 @@ footer {
     background-color: var(--color-secondary);
 }
 
-.itineraire-adresses{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
+.ui-autocomplete{   
+    color: #252020;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #ccc;
+    background-color:var(--color-quatre);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    position: absolute;
+    z-index: 1000;
+}
+.ui-menu-item{
+    color: #252020;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.ui-menu-item:hover {
+    background-color: #876464;
 }
