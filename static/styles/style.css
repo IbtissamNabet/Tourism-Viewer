@@ -27,7 +27,7 @@ h3 {
 .recherches-touristiques {
     display: flex;
     flex-direction: row;
-    height: 55em;
+    height: 56em;
 }
 
 .recherches-touristiques h1{
@@ -72,12 +72,16 @@ select {
 }
 
 .filtres-fieldset {
-    height: 62%;
-    padding-bottom: 2%;
+    height: 50%;
+    padding-bottom: 8%;
 }
 
 .itineraire-fieldset {
     height: 30%;
+}
+
+.position-fieldset {
+    height: 10%;
 }
 
 #reset {
@@ -123,7 +127,7 @@ a:active, a:hover {
 }
 
 header, footer {
-    padding : 20px 50px;
+    padding : 10px 50px;
     color: var(--color-primary);
 }
 
@@ -135,6 +139,7 @@ header {
 }
 
 nav {
+    height: 3em;
     display: flex;
     flex-direction: row;
     align-items: center;
