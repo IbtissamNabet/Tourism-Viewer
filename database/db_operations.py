@@ -1,12 +1,12 @@
-################# FONCTIONS DE VERIFICATION AVANT INSERTION################
+#################################################################################################################################
+################# Ce fichier sert de module qui contient toutes les requettes qui interrogent la base de données ################
+#################################################################################################################################
 
 
 
-# fonction qui de vérification avant insertion dans Types
+# fonction  de vérification avant insertion dans Types
 
 # retourne vrai si un tuple(t1,t2) n'existe pas encore dans la table
-
-#nb d'occurence =0
 
 def NotIn_types(t1,t2,connexion):
 
@@ -24,7 +24,7 @@ def NotIn_types(t1,t2,connexion):
 
 
 
-# fonction qui de vérification avant insertion dans POI
+# fonction  de vérification avant insertion dans POI
 
 # retourne vrai si un tuple(t1,t2,t3) n'existe pas encore dans la table
 
@@ -46,9 +46,7 @@ def NotIn_poi(nom,latitude,longitude,connexion):
 
 
 
-# fonction qui de vérification avant insertion dans appartenir
-
-# retourne vrai si un tuple(t1,t2) n'existe pas encore dans la table
+# fonction  de vérification avant insertion dans appartenir
 
 def NotIn_appartenir(idpoi,t,connexion):
 
@@ -254,9 +252,7 @@ def getData_accTypes(liste_types,connexion):
 
 
 
-#fonction qui retourne les poi autour d'un points :
-
-
+#fonction qui retourne tout les  poi autour de la position actuelle (PAS UTILISE , pour le test)   :
 
 def getPoiArround(latitude,longitude,radiusKm,connexion):
 
@@ -285,9 +281,13 @@ def getPoiArround(latitude,longitude,radiusKm,connexion):
     return result_dict
 
 
+#fonction qui retourne  les  poi selon le type coché autour de la position actuelle   :
+
 
 def getPoiArround_accTypes(liste_types,latitude,longitude,radiusKm,connexion):
+    
     radiusKm=4
+
     final = []  
 
     query="""

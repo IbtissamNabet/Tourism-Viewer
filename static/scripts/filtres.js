@@ -198,7 +198,7 @@ async function updateMarkers() {
         let contact = "";
         if(numTel) contact += numTel + "<br>";
         if(email) contact += email + "<br>";
-        if(siteWeb) contact += "<a>" + siteWeb + "</a>";
+        if(siteWeb) contact += "<a href='" + siteWeb + "' target='_blank'>" + siteWeb + "</a>";
 
 
 
@@ -217,9 +217,6 @@ async function updateMarkers() {
         marker.bindPopup(infosPopup).openPopup();
     }
 }
-
-
-
 
 
 
@@ -257,7 +254,7 @@ for (let c = 0; c < sousTypesLieux.length ; c++){
 
             sousTypesSelectionnes.push(nomCheckBox);  
 
-            // Vérifiez s'il est coché
+            // Vérifiez s'il est coché alors on affiche les poi de ce type autour de sois
 
             if (arround.checked) {
 
@@ -310,10 +307,6 @@ for (let c = 0; c < sousTypesLieux.length ; c++){
     })
 
 }
-
-
-
-
 
 
 

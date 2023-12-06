@@ -1,3 +1,13 @@
+##################################################################################################################################
+###### ce fichier contient les fonctions qui servent a nettoyer les fichiers CSV recupérées depuis le site DataTourise ###########
+###### le dossier raw.csv contient les fichiers recupéres non traités , et le fichier cleaned.csv contient les fichiers###########
+########################    recupérées traités par ce script  ####################################################################
+##################################################################################################################################
+
+
+
+
+
 import pandas as pd
 from pathlib import Path
 import re

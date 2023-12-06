@@ -1,5 +1,5 @@
 
-// initialisation pour l'ouverture de la carte, ici Londres
+// initialisation pour l'ouverture de la carte 
 let map = L.map('map').setView([45.75, 4.85], 13);
 
 

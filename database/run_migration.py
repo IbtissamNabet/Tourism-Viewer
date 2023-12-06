@@ -1,3 +1,11 @@
+###############################################################################################################################
+################################ Ce fichier lance la migration des données depuis les fichiers CSV vers la BD #################
+################################################################################################################################
+
+
+
+
+
 import mysql.connector
 import os
 import data_migration
@@ -11,16 +19,22 @@ connexion=mysql.connector.connect(
 
 # migration des types
 #importer des données à partir du fichier CSV types.csv dans la base de données, en utilisant la connexion MySQL fournie comme argument.
+
 data_migration.import_type(f'..//data//csv_files//cleaned_csv//types.csv',connexion)
 
 #récupération des fichiers de poi du dossiers csv_files/cleaned_csv dans une liste de string 
 #une liste de fichiers propres a POI ( les fichiers qui se terminent par ...)
 #pcq y'a beaucoup de regions donc on a besoin dune liste de *$=fichier propre a chaque region 
+
 dir = "..//data//csv_files//cleaned_csv//"
 files = os.listdir(dir)
 poi_files = [file for file in files if file.endswith("20231014.csv")]
 
+
+
 # pour chaque fichier effectuer la migration
+
+
 for file in poi_files:
     #on crée un chemin (composé de dir qui est le dossier cleaned csv et le fichier actuels )
     file_path = dir+file

@@ -1,3 +1,10 @@
+################################################################################################################
+########## Ce fichier contient le script de la création de la base de donées ###################################
+################################################################################################################
+
+
+
+
 import mysql.connector
 
 mydb=mysql.connector.connect(
@@ -6,7 +13,7 @@ mydb=mysql.connector.connect(
     password="12062003",
 )
 
-#print(mydb)
+
 cursor=mydb.cursor()
 
 #création de la base de données

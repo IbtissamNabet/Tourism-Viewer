@@ -1,3 +1,8 @@
+#################################################################################
+# une application flask qui permet l'interaction entre backend et front end ,####
+# recupérer les requettes et traiter les données json recupérées  et renvoyer####
+# des reponses json  sur des routes #############################################
+#################################################################################
 
 from flask import Flask, jsonify, render_template, url_for, send_from_directory, request
 
@@ -8,8 +13,6 @@ import mysql.connector
 import json 
 
 import geojson
-
-
 
 import database.db_operations
 
@@ -34,15 +37,7 @@ connexion=mysql.connector.connect(
 )
 
 
-
-
-
-
-
 #*************** CREATION DE ROUTE ET DES FONCTIONNALITES CORRESPONDANTES
-
-
-
 
 
 # Chemin du fichier JSON à mettre à jour
@@ -54,18 +49,13 @@ geojson_file_path = 'static/json/data_got.geojson'
 json_file_path_poi='static/json/data_poi.json'
 
 
-
-# La fonction propre a cette url (l'index)
+# La fonction propre a cette url (l'index), affichage de la page 
 
 @app.route("/")
 
 def index():
 
     return render_template("index.html")
-
-# Endpoint pour récupérer les données
-
-#mme que action=..
 
 
 
@@ -105,11 +95,8 @@ def traiter_nombre_selection():
 
             geojson.dump(msg, gjson_file, indent=2)
 
-        
 
         return jsonify({"message": msg}), 200
-
-
 
     except Exception as e:
 
@@ -153,23 +140,15 @@ def traiter_data():
 
             geojson.dump(dict_data, gjson_file, indent=2)
 
-             # Ajout : Supprimer les informations d'un type du fichier data_got.json
-
-        # Retourner le nombre de type selectionner avec un message
-
         return jsonify({"data":dict_data}), 200
 
        
-
     except Exception as e:
-
-        # En cas d'erreur, répondre avec un code d'erreur et un message
-
         return jsonify({"error": str(e)}), 400
 
 
 
-#recup des points d'interet autour depuis la base dans la route apiAutour
+#recup des points d'interet autour de la position actuelle  depuis la base dans la route apiAutour
 
 @app.route("/api/poiAutour/", methods=['POST'])
 
@@ -181,7 +160,7 @@ def poi_autour():
 
         data = request.get_json()
 
-        # Logique de récupération des POI autour de la position actuelle
+        # récupération des POI autour de la position actuelle
 
         latitude = data.get('latitude')
 
@@ -202,32 +181,23 @@ def poi_autour():
             print('la requette a echoué ')
 
 
-
         print(f'la liste de poi trouvée est : {dict_data}') #affiche les données à retourner dans le terminal
 
         with open(json_file_path, 'w') as json_file:
 
             json.dump(dict_data, json_file, indent=2)
 
-    
-
-             # Ajout : Supprimer les informations d'un type du fichier data_got.json
-
-        # Retourner le nombre de type selectionner avec un message
 
         return jsonify({"data":dict_data}), 200
 
-       
 
     except Exception as e:
-
-        # En cas d'erreur, répondre avec un code d'erreur et un message
-
         return jsonify({"error": str(e)}), 400
 
 
 
 
+#Lancement de l'application flask 
 
 if __name__ == '__main__':
 

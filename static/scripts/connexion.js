@@ -15,10 +15,6 @@
 
  */
 
-
-
-
-
 /* fonction de test pour l'interaction
 
 * envoie une liste au serveur
@@ -102,9 +98,6 @@ export function data_selections(sousTypesSelectionnes,fonction){
     // Affichage de la réponse sur la page html
 
     .then(data=>{
-
-        //displayMessageOrData(data);
-
         fonction();
 
     });
@@ -123,6 +116,7 @@ export function data_selections(sousTypesSelectionnes,fonction){
 
 * soit message, soit data
 
+* TEST INTERACTION 
 */
 
 function displayMessageOrData(reponse) {
@@ -173,12 +167,8 @@ function displayMessageOrData(reponse) {
 
 export function getPoiAutour(types,latitude,longitude,radiusKm_,fonction){
 
-    console.log("Rayon dans getPoiAutour :", radiusKm_);
-
-    return new Promise((resolve, reject) => {
-
-        //on recupere de recup les POI
-
+        //on recupere les POI
+        
         const result = '/api/poiAutour/';
 
         const data = {
@@ -215,15 +205,11 @@ export function getPoiAutour(types,latitude,longitude,radiusKm_,fonction){
 
                 console.error("Erreur lors de la récupération des points d'intérêt :", data.error);
 
-                reject(data.error);
-
             }
 
             else {
 
                 //console.log("Points d'interet autour de la position actuelle :", data.data);
-
-                resolve(data.data);
 
                 fonction();
 
@@ -234,16 +220,9 @@ export function getPoiAutour(types,latitude,longitude,radiusKm_,fonction){
         .catch(error => {
 
             console.error('Erreur lors de la récupération des points d\'intérêt :', error);
-            reject(error);  
 
         });
-
-    });
-
-}
-
-
-
+    }
 
 
 const To_export = {

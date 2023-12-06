@@ -1,8 +1,11 @@
+#################################################################################################################################
+## fonctions qui importent les données vers les tables de la base de données depuis des fichiers csv dans csv_files ##############
+#################################################################################################################################
+
+
 import csv
 import db_operations 
 
-####### fonctions qui importent les données vers les tables de la base de données ######
-####### depuis des fichiers csv dans #########
 
 def import_type(file_path,connexion): #'..\\data\\csv_files\\cleaned_csv\\types.csv'
     with open(file_path,newline='', encoding='utf-8') as csvfile:

@@ -1,8 +1,5 @@
-// dictionnaire.js
 
 let myPositionCoord = {};
-
-  
 
 let boutonOnArround = document.getElementById('onArround');
 
@@ -27,13 +24,11 @@ boutonOnArround.addEventListener('change', () => {
 })
 
 
-
 boutonOffArround.addEventListener('change', () => {
 
     boutonOnArround.checked = false;
 
 })
-
 
 
 var options = {
@@ -45,7 +40,6 @@ var options = {
     maximumAge: 0,
 
 };
-
 
 
 /*Pour la couleur du popup correspondant à ma position*/
@@ -67,9 +61,6 @@ let pinkIcon = new L.Icon({
 });
 
 
-
-
-
 let boutonPosition = document.getElementById("myPosition");
 
 boutonPosition.addEventListener('click', () => {
@@ -81,8 +72,7 @@ boutonPosition.addEventListener('click', () => {
 });
 
 
-
-
+// Fonction de position qui affiche un marker sur la positoon actuelle de l'utilisateur
 
 async function position(pos) {
 
