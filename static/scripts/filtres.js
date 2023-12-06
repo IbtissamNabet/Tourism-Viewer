@@ -132,8 +132,15 @@ for (let j = 0; j < typesLieux.length; j++){
 }
 
 
-
-
+/* Pour changer la couleur initiale des markers affichés par leaflet */
+let lieuxIcon = new L.Icon({
+    iconUrl: 'static/images/pinsvert.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [38, 40],
+    iconAnchor: [17, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  });
 
 /* Tableau qui stocke les markers affichés sur la carte */
 let markers = [];
@@ -162,7 +169,7 @@ async function updateMarkers() {
         let nomType = infos[t].nom_type;
 
         /* Affichage du pointeur sur la carte */
-        let marker = new L.marker([infos[t].latitude,infos[t].longitude]);
+        let marker = new L.marker([infos[t].latitude,infos[t].longitude], {icon: lieuxIcon});
         marker.addTo(layerGroup);
 
         let nomLieu = infos[t].nom_poi;

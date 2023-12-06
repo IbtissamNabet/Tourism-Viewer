@@ -27,11 +27,11 @@ function onMapClick(e) {
 }
 map.on('click', onMapClick);
 
-let pinkIcon = new L.Icon({
+let logoIcon = new L.Icon({
     iconUrl: 'static/images/logo.png',
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [55, 55],
-    iconAnchor: [26, 45],
+    iconSize: [38, 40],
+    iconAnchor: [17, 41],
     popupAnchor: [1, -34],
     shadowSize: [41, 41]
   });
@@ -52,7 +52,7 @@ function position(pos) {
     console.log(`Longitude : ${crd.longitude}`);
     console.log(`La précision est de ${crd.accuracy} mètres.`);
     // Mets à jour la position du marqueur avec les coordonnées de la géolocalisation
-    let marker = L.marker([crd.latitude,crd.longitude ], {icon: pinkIcon}).addTo(map);
+    let marker = L.marker([crd.latitude,crd.longitude ], {icon: logoIcon}).addTo(map);
     marker.bindPopup("<b> Vous êtes là </b>").openPopup();
     // Déplace la carte pour montrer la nouvelle position
     map.setView([crd.latitude, crd.longitude], 13);
