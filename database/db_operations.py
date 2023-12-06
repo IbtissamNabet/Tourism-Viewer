@@ -124,3 +124,32 @@ def getData_accTypes(liste_types,connexion):
         final=final+result 
     # Renvoyer les données au format JSON
     return final
+
+
+#fonction qui retourne les poi autour d'un points :
+
+def getPoiArround(latitude,longitude,radiusKm,connexion):
+
+    radiusKm=2
+
+    result_dict = {}  
+
+    curseur=connexion.cursor(dictionary=True)
+
+    query="""
+
+       SELECT * FROM POI WHERE (6371 * ACOS(COS(RADIANS(%s)) * COS(RADIANS(latitude)) * COS(RADIANS(longitude) - RADIANS(%s)) + SIN(RADIANS(%s)) * SIN(RADIANS(latitude)))) <= %s; """
+
+    curseur.execute(query,(latitude, longitude, latitude,radiusKm))
+
+    result_dict = curseur.fetchall()
+
+    if curseur:
+
+        curseur.close()
+
+    print("Requête exécutée avec les valeurs :", latitude, longitude, radiusKm)
+
+    print("Les POI depuis la base de données :", result_dict)
+
+    return result_dict

@@ -27,11 +27,11 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
         <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
         <script type="module" src="static/scripts/itineraire.js"></script>
-        <script type="module" src="static/scripts/autocompletion.js"></script>
 
         <script type="text/javascript" src="static/scripts/map.js" defer></script>
         <script type="module" src="static/scripts/connexion.js"></script>
         <script type="module" src="static/scripts/filtres.js"></script>
+        <script type="module" src="static/scripts/position.js"></script>
 
         <!-- Inclure jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -81,6 +81,17 @@
                             </div>
                         </div>
                     </fieldset>
+
+                    <fieldset class="position-fieldset">
+                        <legend><h1>Autour de moi</h1></legend>
+                        <div class="boutons-radios">
+                            <button id="myPosition" value="Ma position">Ma position</button>
+                            <input type="radio" id="onArround">
+                            <label for="onArround">On</label>
+                            <input type="radio" id="offArround">
+                            <label for="offArround">Off</label>
+                        </div>                       
+                    </fieldset>                    
                    
                     <fieldset class="filtres-fieldset">
                         <legend><h1>Filtres</h1></legend>

@@ -27,43 +27,6 @@ function onMapClick(e) {
 }
 map.on('click', onMapClick);
 
-let pinkIcon = new L.Icon({
-    iconUrl: 'static/images/logo.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    iconSize: [55, 55],
-    iconAnchor: [26, 45],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  });
-
-let options = {
-    enableHighAccuracy: true,
-    //la duree pour na
-    timeout: 5000,
-    //la durée maximale pour mettre en cache la position
-    maximumAge: 0,
-  };
-/*position est appelée lorsque la position est récupérée avec succès. Les coordonnées obtenues sont utilisées 
-pour mettre à jour la position du marqueur et déplacer la carte pour montrer la nouvelle position.*/
-function position(pos) {
-    var crd = pos.coords;
-    console.log(" position actuelle  de l'utilisateur est :");
-    console.log(`Latitude : ${crd.latitude}`);
-    console.log(`Longitude : ${crd.longitude}`);
-    console.log(`La précision est de ${crd.accuracy} mètres.`);
-    // Mets à jour la position du marqueur avec les coordonnées de la géolocalisation
-    let marker = L.marker([crd.latitude,crd.longitude ], {icon: pinkIcon}).addTo(map);
-    marker.bindPopup("<b> Vous êtes là </b>").openPopup();
-    // Déplace la carte pour montrer la nouvelle position
-    map.setView([crd.latitude, crd.longitude], 13);
-    
-}
-
-function error(err) {
-console.warn(`ERREUR (${err.code}): ${err.message}`);
-}
-//pour recuperer la position actuelle 
-navigator.geolocation.getCurrentPosition(position, error, options);
 /* 
 Si besoin d'autres exemples
 

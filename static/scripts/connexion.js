@@ -83,9 +83,48 @@ function displayMessageOrData(reponse) {
 }
 
 
+//envoie des coordonnées en serveur pour afficher les poi
+export function getPoiAutour(latitude,longitude,radiusKm_){
+    console.log("Rayon dans getPoiAutour :", radiusKm_);
+    return new Promise((resolve, reject) => {
+        //on recupere de recup les POI
+        const result = '/api/poiAutour/';
+        const data = {
+            latitude:latitude,
+            longitude:longitude,
+            radiusKm: radiusKm_
+        };
+        fetch (result ,{
+            method : 'POST',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body:JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data =>{
+            if (data.error) {
+                console.error("Erreur lors de la récupération des points d'intérêt :", data.error);
+                reject(data.error);
+            }
+            else {
+                console.log("Points d'interet autour de la position actuelle :", data.data);
+                resolve(data.data);
+            }
+        })
+        .catch(error => {
+            console.error('Erreur lors de la récupération des points d\'intérêt :', error);
+            console.error("Server error message:", error.error);
+            reject(error);  
+        });
+    });
+}
+
+
 const To_export = {
     test_nombre_selections,
-    data_selections
+    data_selections,
+    getPoiAutour
 }
 
 export default To_export;
