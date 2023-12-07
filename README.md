@@ -59,7 +59,7 @@ Ils s'affichent sur la carte sous formes de pins verts. Toutes les informations 
 en question apparaissent lorsque l'un d'entre eux est sélectionné.
 
 ## Crédits
-### Encadrant   : - [CASABET Remy ](http://cazabetremy.fr/)
+### Encadrant   : [CAZABET Remy ](http://cazabetremy.fr/)
 ### Développeuses
 
 - [RATOANDROMANANA Miella p2108878](https://forge.univ-lyon1.fr/p2108878)
