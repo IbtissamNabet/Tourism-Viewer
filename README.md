@@ -72,8 +72,8 @@ en question apparaissent lorsque l'un d'entre eux est sélectionné.
 - [Pandas](https://pandas.pydata.org/)
 - [pathlib](https://docs.python.org/3/library/pathlib.html)
 - [os](https://docs.python.org/3/library/os.html)
-- [Jqueryui] (https://jqueryui.com/)
-- [Jquery] (https://jquery.com/)
+- [Jqueryui](https://jqueryui.com/)
+- [Jquery](https://jquery.com/)
 
 
 
