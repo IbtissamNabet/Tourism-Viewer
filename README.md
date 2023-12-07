@@ -27,9 +27,6 @@ Tourism Viewer est un site web qui permet de visualiser des lieux touristiques d
     `sudo apt install mysql-server`
 
 
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
 ## Compilation
 
 L'application web est gérée par le fichier app.py
