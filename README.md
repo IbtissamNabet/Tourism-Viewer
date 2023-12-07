@@ -12,7 +12,8 @@ Tourism Viewer est un site web qui permet de visualiser des lieux touristiques d
 
 ## Installation
 
-**OS :** Linux
+**OS :** Linux , Mac OS , Windows 
+
 
 **Librairies :**
 - python 3
@@ -26,10 +27,19 @@ Tourism Viewer est un site web qui permet de visualiser des lieux touristiques d
 - mysql-server
     `sudo apt install mysql-server`
 
+- pandas
+    `pip install pandas`
+
+- pathlib 
+    `pip install pathlib`
+
+- os 
+    `pip install os-sys`
 
 ## Compilation
 
-L'application web est gérée par le fichier app.py
+L'application web est gérée par Flask (le fichier app.py)
+--- Lancer Le script app.py , copier l'URL affichée dans le navigateur ET  Bienvenus Dans notre Service Web ---
 
 ## À propos de l'utilisation
 
@@ -49,6 +59,7 @@ Ils s'affichent sur la carte sous formes de pins verts. Toutes les informations 
 en question apparaissent lorsque l'un d'entre eux est sélectionné.
 
 ## Crédits
+### Encadrant   : - [CASABET Remy ](http://cazabetremy.fr/)
 ### Développeuses
 
 - [RATOANDROMANANA Miella p2108878](https://forge.univ-lyon1.fr/p2108878)
@@ -58,3 +69,12 @@ en question apparaissent lorsque l'un d'entre eux est sélectionné.
 
 ### Librairie utilisée pour la carte :
 - [Leaflet](https://leafletjs.com/)
+- [Pandas](https://pandas.pydata.org/)
+- [pathlib](https://docs.python.org/3/library/pathlib.html)
+- [os](https://docs.python.org/3/library/os.html)
+- [Jqueryui] (https://jqueryui.com/)
+- [Jquery] (https://jquery.com/)
+
+
+
+

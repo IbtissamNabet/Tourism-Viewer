@@ -11,7 +11,7 @@ def import_type(file_path,connexion): #'..\\data\\csv_files\\cleaned_csv\\types.
     with open(file_path,newline='', encoding='utf-8') as csvfile:
         type = csv.DictReader(csvfile)  
         for row in type:
-            label= row['Label'].strip()
+            label= row['Label'].strip() #ENLEVER LESPACE DU DEBUT ET DE FIN 
             parentLabel=row['ParentLabel'].strip()
             if(db_operations.NotIn_types(label,parentLabel,connexion)):
                 db_operations.insert_type(label,parentLabel,connexion)
