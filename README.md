@@ -36,6 +36,9 @@ Tourism Viewer est un site web qui permet de visualiser des lieux touristiques d
 - os 
     `pip install os-sys`
 
+- re 
+    `pip install regex`
+
 ## Compilation
 
 L'application web est gérée par Flask (le fichier app.py)
