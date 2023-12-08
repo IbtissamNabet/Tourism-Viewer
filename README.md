@@ -30,14 +30,6 @@ Tourism Viewer est un site web qui permet de visualiser des lieux touristiques d
 - pandas
     `pip install pandas`
 
-- pathlib 
-    `pip install pathlib`
-
-- os 
-    `pip install os-sys`
-
-- re 
-    `pip install regex`
 
 ## Compilation
 
