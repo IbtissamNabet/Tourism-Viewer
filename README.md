@@ -62,7 +62,7 @@ en question apparaissent lorsque l'un d'entre eux est sélectionné.
 - [NABET Ibtissam p2208660](https://forge.univ-lyon1.fr/p2208660)
 - [PAULUS Noëllie p2100318](https://forge.univ-lyon1.fr/p2100318)
 
-### Librairie utilisée pour la carte :
+### Librairies utilisées pour la carte :
 - [Leaflet](https://leafletjs.com/)
 - [Pandas](https://pandas.pydata.org/)
 - [Jqueryui](https://jqueryui.com/)
