@@ -65,10 +65,7 @@ en question apparaissent lorsque l'un d'entre eux est sélectionné.
 ### Librairie utilisée pour la carte :
 - [Leaflet](https://leafletjs.com/)
 - [Pandas](https://pandas.pydata.org/)
-- [pathlib](https://docs.python.org/3/library/pathlib.html)
-- [os](https://docs.python.org/3/library/os.html)
 - [Jqueryui](https://jqueryui.com/)
-- [Jquery](https://jquery.com/)
 
 
 
